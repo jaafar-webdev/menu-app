@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { register } from "@/features/public/services/authService";
+import { register, login } from "@/features/public/services/authService";
 import {
   validateEmail,
   validatePassword,
@@ -62,12 +62,21 @@ const useRegister = () => {
         formData.email,
         formData.password,
         formData.name,
+        formData.phoneNumber,
       );
 
       if (error) {
         setErrors({ form: error });
       } else {
-        router.push("/login?registered=true");
+        const { error: loginError } = await login(
+          formData.email,
+          formData.password,
+        );
+        if (loginError) {
+          setErrors({ form: loginError });
+        } else {
+          router.push("/");
+        }
       }
 
       setIsSubmitting(false);

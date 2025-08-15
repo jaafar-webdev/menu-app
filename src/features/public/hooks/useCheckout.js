@@ -2,22 +2,37 @@
 import { useState, useEffect, useCallback } from "react";
 import useCartStore from "../../../store/cartStore";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const useCheckout = () => {
   const { clearCart, getSubtotal, items } = useCartStore();
   const router = useRouter();
+  const { user } = useAuth();
 
-  const [userInfo, setUserInfo] = useState(() => {
-    const savedUserInfo = sessionStorage.getItem("userInfo");
-    return savedUserInfo
-      ? JSON.parse(savedUserInfo)
-      : {
-          name: "Gaafer Alwakeil",
-          phone: "01023456789",
-          address: "",
-        };
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    phone: "",
+    address: "",
   });
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const savedUserInfoJSON = sessionStorage.getItem("userInfo");
+    const savedUserInfo = savedUserInfoJSON
+      ? JSON.parse(savedUserInfoJSON)
+      : null;
+
+    if (user) {
+      console.log(user);
+      setUserInfo({
+        name: user.displayName || "",
+        phone: user.phoneNumber || "",
+        address: savedUserInfo ? savedUserInfo.address : "",
+      });
+    } else if (savedUserInfo) {
+      setUserInfo(savedUserInfo);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (items.length === 0) {

@@ -10,7 +10,7 @@ export default function CartMobileBar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  if (items.length === 0 || pathname === "/checkout") {
+  if (items.length === 0 || pathname !== "/menu") {
     return null;
   }
 

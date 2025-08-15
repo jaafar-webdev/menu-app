@@ -1,0 +1,462 @@
+{
+   "groups": [
+      {
+         "id": "11b89031-9b92-4c25-bee6-0b4f2799ce2d",
+         "name": "إعلانات",
+         "image_url": null,
+         "products": [
+            {
+               "id": "1a9136c3-0d2e-462b-9b79-01f3780194ae",
+               "categoryId": "11b89031-9b92-4c25-bee6-0b4f2799ce2d",
+               "name": "..",
+               "description": "..",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/1a9136c3-0d2e-462b-9b79-01f3780194ae/687b92a56454b.png",
+               "price": 0,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+         "name": "شاورما سجق",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f24db966-110c-4338-aa4c-000cab700f32/683ef721e163f.jpeg",
+         "products": [
+            {
+               "id": "4c8f31c7-d2b6-4d4e-a9a8-10c75bba8cc1",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "شاورما سجق شيك",
+               "description": "عبارة عن شاورما سجق مع صوص كوكتيل +طماطم +بطاطا فعلبة واحدة",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4c8f31c7-d2b6-4d4e-a9a8-10c75bba8cc1/6837170ce8682.jpeg",
+               "price": 95,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "15b8b21c-7c1d-4f3c-ac41-4e287279d021",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "ساندوتش شاورما سجق",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/15b8b21c-7c1d-4f3c-ac41-4e287279d021/685ffb6f1cf46.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  { "id": "variant_s_sausage_saj", "name": "صاج", "price": 85 },
+                  {
+                     "id": "variant_s_sausage_kaiser",
+                     "name": "كايزر",
+                     "price": 75
+                  }
+               ]
+            },
+            {
+               "id": "dd36487a-ec4b-4786-acb8-2749fff71bad",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "فته شاورما سجق",
+               "description": "فته شاورما سجق",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/dd36487a-ec4b-4786-acb8-2749fff71bad/683ef74fe75b9.jpeg",
+               "price": 120,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "f24db966-110c-4338-aa4c-000cab700f32",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "شاورما سجق بالوزن",
+               "description": "تقدم مع صوص كوكتيل +كلوسلو +مخلل خيار +طماطم +بطاطا",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f24db966-110c-4338-aa4c-000cab700f32/683ef721e163f.jpeg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_w_sausage_250",
+                     "name": "ربع كيلو",
+                     "price": 180
+                  },
+                  {
+                     "id": "variant_w_sausage_500",
+                     "name": "نصف كيلو",
+                     "price": 350
+                  },
+                  {
+                     "id": "variant_w_sausage_1000",
+                     "name": "كيلو",
+                     "price": 680
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+         "name": "شوربة و مقبلات",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4/65dde0dcaf9a7.jpeg",
+         "products": [
+            {
+               "id": "08cc9eab-efe5-44ab-b1a4-6610b59cb6fe",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "مخلل خيار كبير",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/08cc9eab-efe5-44ab-b1a4-6610b59cb6fe/685ff9fc2e061.png",
+               "price": 80,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "dec82047-99b4-548e-bebb-b9c9ba0fe3ab",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "بطاطس مدوره",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/ZpHebw9fKMg_OM5sKZITsRE4_0vA9DmI.jpg",
+               "price": 55,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "e10cc09e-7627-56cb-9916-16f9c79a22b5",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "طبق حمص شاورما فراخ",
+               "description": "(صوص حمص يعلوه شرائح الشاورما فراخ الذهبية لذيذه )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/o3HUkJUzWUCQv99jFdtb8_BE-b1xgdQx.jpg",
+               "price": 220,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "3e3e2bba-6064-5afa-ad6d-8f571c5af3c9",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "سمبوسك جبنه سوريه",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/3e3e2bba-6064-5afa-ad6d-8f571c5af3c9/68613544998d0.png",
+               "price": 25,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+         "name": "عروض توفير ابن الشام",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/2072b7d1-675b-58fc-9cdb-71cd2db616f1/65dde044d29f5.jpeg",
+         "products": [
+            {
+               "id": "065c3368-5f51-4a1b-a6a9-391be9ce7848",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "صينيه الحوت",
+               "description": "3سيخ كفته لحم مشوي+3 سيخ نقانق +3 ورك مشوي +بصل وبندوره مشوي+كيلو ونص ارز+ثوميه ص+حمص ص+سلطه خضرا ص+مخلل مشكل ص (تكفي من 4 الي 5 اشخاص)",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/065c3368-5f51-4a1b-a6a9-391be9ce7848/66fadb9a94ab9.jpeg",
+               "price": 699,
+               "price_before_discount": 750,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "4bd29e71-848c-5569-83db-e62c59d0cea8",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "صينيه السلطان",
+               "description": "فرخه على الفحم + نص كيلو شيش + نص كيلو كفته + نص كيلو كباب ( شقف ) + 2 كيلو ارز مطهي + 6 سلطه مشكلين ( طحينه + متبل + سلطه خضراء + توميه + زبادي ) + 4 ربطه عيش + 10 محمرة مشويه+ 1 كنافه ( تكفي من 6 الي 7 افراد )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4bd29e71-848c-5569-83db-e62c59d0cea8/686191832cbcb.jpeg",
+               "price": 1999,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "cf18c9ed-d698-5e8f-8440-919c00ee6c5d",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "هاتريك 3 شاورما فراخ +بطاطس",
+               "description": "3 شاورما فراخ عيش صاج",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/cf18c9ed-d698-5e8f-8440-919c00ee6c5d/6542817be249a.jpeg",
+               "price": 315,
+               "price_before_discount": 340,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "01e3f823-08e2-5ef9-8e93-f805ebb38e38",
+         "name": "وجبات لحم مشوية",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/01e3f823-08e2-5ef9-8e93-f805ebb38e38/65dddf02e14c3.jpeg",
+         "products": [
+            {
+               "id": "c45f4933-6a36-5411-8111-d5a2377e024e",
+               "categoryId": "01e3f823-08e2-5ef9-8e93-f805ebb38e38",
+               "name": "وجبه مشوي مشكل",
+               "description": "( 4 اسياخ من كباب وكفته لحم وشيش طاوق صدور وكفته فراخ تقدم مع سلطه وحمص وعيش ومخلل )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/DQ60LQCBC2O4iC0OaCkB_BxetfSB1apM.jpg",
+               "price": 395,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "f74f9970-2d2c-533c-99cb-8bf52eb4a3ac",
+         "name": "وجبات لحم مدخن او فراخ مدخنة",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f74f9970-2d2c-533c-99cb-8bf52eb4a3ac/65ddd9ca7611e.jpeg",
+         "products": [
+            {
+               "id": "a35c8c01-8dcb-44d4-9494-16c43b2dd1b9",
+               "categoryId": "f74f9970-2d2c-533c-99cb-8bf52eb4a3ac",
+               "name": "وجبة وركين مدخنة +ارز",
+               "description": "تقدم مع ارز وبطاطا وتومية عادى وتومية سباسى وعيش",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/a35c8c01-8dcb-44d4-9494-16c43b2dd1b9/6869789149e96.png",
+               "price": 245,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "5dd9ceef-5332-544e-8c57-d8b8c4bad2d0",
+         "name": "السلطات",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/5dd9ceef-5332-544e-8c57-d8b8c4bad2d0/65dde1293e2cc.jpeg",
+         "products": [
+            {
+               "id": "79109e4d-3060-5b5d-8cd5-c90cc6475b34",
+               "categoryId": "5dd9ceef-5332-544e-8c57-d8b8c4bad2d0",
+               "name": "حمص",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/TEykm-HYf8AjH-8MYEbzolCGKBxZy4nl.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  { "id": "variant_hummus_small", "name": "صغير", "price": 45 },
+                  { "id": "variant_hummus_large", "name": "كبير", "price": 80 }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "ec61b6f7-facd-5ca9-ace6-fac688faf683",
+         "name": "وجبات فراخ مشوية",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/ec61b6f7-facd-5ca9-ace6-fac688faf683/65dddab63d60b.jpeg",
+         "products": [
+            {
+               "id": "d9bbc7c3-9edf-55be-b03c-1bf90faf0543",
+               "categoryId": "ec61b6f7-facd-5ca9-ace6-fac688faf683",
+               "name": "ربع فرخه مشويه ع الفحم (ورك)",
+               "description": "( ورك مشوي متبل طازج علي فحم تقدم مع بطاطس وارز وصوص توميه وعيش ومخلل)",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/d9bbc7c3-9edf-55be-b03c-1bf90faf0543/686019a482ccb.png",
+               "price": 120,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "494141ff-f85e-567c-814c-911b41a82056",
+         "name": "مشويات فراخ",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/494141ff-f85e-567c-814c-911b41a82056/65dddee27a771.jpeg",
+         "products": [
+            {
+               "id": "36d3339b-842c-5de3-ad1d-ac5732c9cb4c",
+               "categoryId": "494141ff-f85e-567c-814c-911b41a82056",
+               "name": "فرخه ع الفحم",
+               "description": "( فراخ متبل طازج مشويه ع فحم تقدم مع بطاطس وصوص توميه وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/TCO5GVJaE4TW0Wz-Tz4NZgmfrSzwcyXv.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_grill_chicken_half",
+                     "name": "نصف",
+                     "price": 220
+                  },
+                  {
+                     "id": "variant_grill_chicken_full",
+                     "name": "كاملة",
+                     "price": 435
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "3d0c758a-d390-5a14-b7b7-9cebd4384ac7",
+         "name": "طواجن",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/3d0c758a-d390-5a14-b7b7-9cebd4384ac7/65dddb4c7b4a9.jpeg",
+         "products": [
+            {
+               "id": "9245465b-769c-5365-8b5c-0b3438bbf057",
+               "categoryId": "3d0c758a-d390-5a14-b7b7-9cebd4384ac7",
+               "name": "طاجن كفته بالطماطم (1/4 كيلو)",
+               "description": "( لحم متبل مفرود داخل طاجن يعلوه شرائح طماطم وفلفل الاخضر يقدم مع (ليمون ومخلل وعيش)",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/-lw-rt6mddbejy89Ts8PcXYo69DT6eTl.jpg",
+               "price": 275,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "6339a534-d85d-565a-8152-8a6a47fc3d65",
+         "name": "مشويات لحم بالكيلو",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/6339a534-d85d-565a-8152-8a6a47fc3d65/65ddda75cfe9d.jpeg",
+         "products": [
+            {
+               "id": "2356a1bc-b6aa-5b6c-bfd7-87caec2fccdd",
+               "categoryId": "6339a534-d85d-565a-8152-8a6a47fc3d65",
+               "name": "كباب (شقف)",
+               "description": "(اسياخ من كباب مشويه متبل بطريقه مميزه تقدم مع عيش وبصل وطماطم وفلفل ومحمره مشويه )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/FffuqiPtC0xIcalHnlsd99WRA01TcmF5.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_kebab_250",
+                     "name": "ربع كيلو",
+                     "price": 350
+                  },
+                  {
+                     "id": "variant_kebab_500",
+                     "name": "نصف كيلو",
+                     "price": 700
+                  },
+                  { "id": "variant_kebab_1000", "name": "كيلو", "price": 1350 }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "93322e95-c843-5e89-9215-c76bca438f58",
+         "name": "شاورما لحمة",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/93322e95-c843-5e89-9215-c76bca438f58/65dddcbca537b.jpeg",
+         "products": [
+            {
+               "id": "86d986aa-6275-55b9-ac20-bc24c99a0473",
+               "categoryId": "93322e95-c843-5e89-9215-c76bca438f58",
+               "name": "ساندوتش شاورما لحم",
+               "description": "(شرائح شاورما لحمه مع وشرائح بصل بقدونس وطماطم ومخلل لفت داخل الساندوتش)",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/0bXPqU473MMxMIiMYyFIBk22L7AOwKGg.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_m_shawarma_saj",
+                     "name": "صاج",
+                     "price": 125
+                  },
+                  {
+                     "id": "variant_m_shawarma_kaiser",
+                     "name": "كايزر",
+                     "price": 115
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+         "name": "شاورما فراخ",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f70943e0-c09f-534a-9f11-a7de5f3c2097/65dde16a95a0c.jpeg",
+         "products": [
+            {
+               "id": "c6ce57f6-4bcb-49cd-a0df-e04dce1fe3e4",
+               "categoryId": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+               "name": "شاورما شيك فراخ",
+               "description": "75 جرام شاورما مع بطاطا وتوميه ومخلل ف علبه",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/c6ce57f6-4bcb-49cd-a0df-e04dce1fe3e4/6671eefbcc5dd.jpeg",
+               "price": 85,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "54185129-a05d-5f34-aab9-e96e8f31bd1f",
+               "categoryId": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+               "name": "تورته شاورما فراخ",
+               "description": "( شرائح شاورما فراخ ذهبيه تتكون من 22 قطعه تكفي 4 اشخاص 2 دور/او44 قطعه تكفي 8 اشخاص 3 دور تقدم مع شرائح بطاطس وتوميه وكلو سلو ومخلل )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/uPLcYtNjQzo8gJskwYGxKRle4K5H4kAk.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_c_shawarma_cake_s",
+                     "name": "دورين (تكفي 4 أفراد)",
+                     "price": 450
+                  },
+                  {
+                     "id": "variant_c_shawarma_cake_l",
+                     "name": "3 أدوار (تكفي 8 أفراد)",
+                     "price": 850
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+         "name": "فراخ بروستد",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/783f09c2-d665-5bc6-9331-6685cf4c7727/65dde1c0c646e.jpeg",
+         "products": [
+            {
+               "id": "6e547c01-5ce5-57c9-97c1-7c1ddcd9a2d5",
+               "categoryId": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+               "name": "فرخه بروستد ٨ قطع",
+               "description": "( قطع فراخ مقليه المقرمشه ذهبيه اللون تقدم مع بطاطس وصوص توميه وتوميه اسبايسي ومخلل وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/6e547c01-5ce5-57c9-97c1-7c1ddcd9a2d5/6475e66079b50.jpeg",
+               "price": 475,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "51129a82-7c0b-5069-910c-4f6cb38d5446",
+               "categoryId": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+               "name": "وجبه 3 قطع فراخ بروستد",
+               "description": "( 3 قطع فراخ بروستد المقرمشه ذهبيه اللون تقدم مع بطاطس ارز بسمتي صوص توميه ومخلل وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/51129a82-7c0b-5069-910c-4f6cb38d5446/64aeaba4a27fa.jpeg",
+               "price": 155,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "4d842955-ddf1-5675-a9e2-14dc9137ffca",
+         "name": "شاورما ميكس",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4d842955-ddf1-5675-a9e2-14dc9137ffca/65dddf5709fbc.png",
+         "products": [
+            {
+               "id": "42a3281b-e8ec-53c4-b28b-87c4abde1367",
+               "categoryId": "4d842955-ddf1-5675-a9e2-14dc9137ffca",
+               "name": "فته شاورما ميكس",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/42a3281b-e8ec-53c4-b28b-87c4abde1367/686032c099774.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_mix_fatteh_s",
+                     "name": "عادي",
+                     "price": 130
+                  },
+                  { "id": "variant_mix_fatteh_l", "name": "كبير", "price": 150 }
+               ]
+            }
+         ]
+      }
+   ] 
+}

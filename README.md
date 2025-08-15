@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Menu App
 
-## Getting Started
+This is a modern, responsive menu application built with Next.js and Tailwind CSS. It provides a seamless user experience for browsing food categories and items, with a dynamic layout that adapts to different screen sizes.
 
-First, run the development server:
+## ✨ Features
 
-```bash
+-  **Responsive Design**: Optimized for small, medium, and large screens.
+-  **Component-Based Architecture**: Built with reusable React components.
+-  **Dynamic Layout**: The layout adjusts based on the screen size to provide the best user experience.
+-  **Skeleton Loading**: Skeletons are shown while content is loading to reduce Cumulative Layout Shift (CLS) and improve perceived performance.
+-  **Sticky Elements**: The shopping cart and category switcher are sticky for easy access.
+-  **Modern Tech Stack**: Utilizes Next.js for server-side rendering and Tailwind CSS for styling.
+
+## 🛠️ Tech Stack
+
+-  **Framework**: [Next.js](https://nextjs.org/)
+-  **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-  **Language**: JavaScript (with JSX)
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your machine.
+
+-  [Node.js](https://nodejs.org/)
+-  [npm](https://www.npmjs.com/get-npm)
+
+### Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/menu-app.git
+   ```
+2. **Navigate to the project directory:**
+   ```sh
+   cd menu-app
+   ```
+3. **Install the dependencies:**
+   ```sh
+   npm install
+   ```
+
+## 🛡️ Environment Variables
+
+All environment variables should be defined in the `.env` file. See `.env.example` for required variables.
+
+-  `NEXT_PUBLIC_API_URL`: The base URL for your API.
+-  `NEXT_PUBLIC_APP_NAME`: The name of your application.
+
+### Setting Up Environment Variables
+
+1. Copy `.env.example` to `.env`:
+   ```sh
+   cp .env.example .env
+   ```
+2. Fill in the required values in `.env`.
+
+### Running the Development Server
+
+To start the development server, run the following command:
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src
+├── app
+│   ├── globals.css         # Global styles
+│   ├── layout.js           # Main layout component
+│   └── page.js             # Main page component
+└── components
+    ├── cart
+    │   └── CartDesktop.jsx   # Desktop cart component
+    ├── categories
+    │   ├── CategoriesDesktop.jsx
+    │   ├── CategoriesMobile.jsx
+    │   ├── CategoriesSwitcher.jsx
+    │   ├── CategoryTab.jsx
+    │   └── ...               # Other category-related components
+    ├── header
+    │   ├── Header.jsx        # Header component
+    │   └── ...               # Other header-related components
+    ├── menu
+    │   ├── MenuItem.jsx      # Menu item component
+    │   ├── MenuList.jsx      # Menu list component
+    │   └── ...               # Other menu-related components
+    └── shared
+        ├── Button.jsx        # Reusable button component
+        └── IconButton.jsx    # Reusable icon button component
+```

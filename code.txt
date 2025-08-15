@@ -1,0 +1,2790 @@
+The following is a digest of the repository "menu-app".
+This digest is designed to be easily parsed by Large Language Models.
+
+--- SUMMARY ---
+Repository: menu-app
+Files Analyzed: 55
+Total Text Size: 87.01 KB
+Estimated Tokens (text only): ~٢٤٬٢٥١
+
+--- DIRECTORY STRUCTURE ---
+menu-app/
+├── src/
+│   ├── app/
+│   │   ├── (dashboard)/
+│   │   │   ├── addcategory/
+│   │   │   │   ├── CategoryForm.jsx
+│   │   │   │   └── page.js
+│   │   │   ├── addproduct/
+│   │   │   │   └── page.js
+│   │   │   ├── categories/
+│   │   │   │   └── page.js
+│   │   │   ├── products/
+│   │   │   │   └── page.js
+│   │   │   ├── layout.js
+│   │   │   └── page.js
+│   │   ├── (public)/
+│   │   │   ├── checkout/
+│   │   │   │   ├── CheckoutClientView.jsx
+│   │   │   │   ├── OrderItems.jsx
+│   │   │   │   ├── OrderSummary.jsx
+│   │   │   │   ├── page.js
+│   │   │   │   └── UserInfoForm.jsx
+│   │   │   ├── login/
+│   │   │   │   └── page.jsx
+│   │   │   ├── menu/
+│   │   │   │   ├── loading.jsx
+│   │   │   │   └── page.js
+│   │   │   ├── orders/
+│   │   │   │   └── page.jsx
+│   │   │   ├── profile/
+│   │   │   │   └── page.jsx
+│   │   │   ├── register/
+│   │   │   │   └── page.jsx
+│   │   │   └── reset-password/
+│   │   │       └── page.jsx
+│   │   ├── api/
+│   │   │   ├── auth/
+│   │   │   │   └── login/
+│   │   │   │       └── route.js
+│   │   │   └── db/
+│   │   │       └── route.js
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   ├── not-found.jsx
+│   │   └── page.js
+│   ├── components/
+│   │   ├── auth/
+│   │   │   ├── AuthLink.jsx
+│   │   │   └── FormWrapper.jsx
+│   │   ├── ui/
+│   │   │   ├── Alert.jsx
+│   │   │   ├── Button.jsx
+│   │   │   └── Input.jsx
+│   │   ├── Button.jsx
+│   │   └── LogoutButton.jsx
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   ├── features/
+│   │   └── dashboard/
+│   │       ├── components/
+│   │       │   ├── DashboardSidebar.jsx
+│   │       │   └── FileUpload.jsx
+│   │       └── hooks/
+│   │           └── useFileUpload.js
+│   ├── hooks/
+│   │   ├── useCheckout.js
+│   │   ├── useLogin.js
+│   │   ├── useLogout.js
+│   │   ├── useRegister.js
+│   │   └── useResetPassword.js
+│   ├── store/
+│   │   └── cartStore.js
+│   ├── utils/
+│   │   ├── auth.js
+│   │   └── authUtils.js
+│   └── middleware.js
+├── db.json
+├── eslint.config.mjs
+├── gemini.review.js
+├── jsconfig.json
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+├── PROJECT_STRUCTURE.md
+├── README.md
+└── tailwind.config.js
+
+
+--- FILE CONTENTS ---
+============================================================
+FILE: src/app/(dashboard)/addcategory/CategoryForm.jsx
+============================================================
+"use client";
+
+import { useState } from "react";
+import { FileUpload } from "@/features/dashboard/components/FileUpload";
+import useFileUpload from "@/features/dashboard/hooks/useFileUpload";
+
+export const CategoryForm = () => {
+   const [title, setTitle] = useState("");
+
+   const { file, preview, fileInputRef, handleFileChange, handleButtonClick } =
+      useFileUpload();
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      const response = await fetch("http://localhost:3001/categories", {
+         method: "POST",
+         body: JSON.stringify(data),
+      });
+      const json = await response.json();
+      console.log(json);
+   };
+
+   return (
+      <div className="bg-indigo-300 w-fit p-4 mt-2 rounded-2xl">
+         <form onSubmit={handleSubmit}>
+            <label className="text-white w-20">
+               عنوان الفئة
+               <input
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="p-1 outline-0 bg-white text-indigo-800 mx-2 rounded-md"
+               />
+            </label>
+
+            <FileUpload
+               preview={preview}
+               fileInputRef={fileInputRef}
+               handleFileChange={handleFileChange}
+               handleButtonClick={handleButtonClick}
+               file={file}
+            />
+
+            <button className="bg-white px-3 py-1 rounded-xl text-indigo-800 cursor-pointer mt-6">
+               إرسال
+            </button>
+         </form>
+      </div>
+   );
+};
+
+
+============================================================
+FILE: src/app/(dashboard)/addcategory/page.js
+============================================================
+"use client";
+
+import { CategoryForm } from "./CategoryForm";
+
+export default function AddCategoryPage() {
+   return (
+      <main>
+         <div>
+            <p className="font-medium text-2xl">اضف فئة جديدة</p>
+         </div>
+         <div>
+            <CategoryForm />
+         </div>
+      </main>
+   );
+}
+
+
+============================================================
+FILE: src/app/(dashboard)/addproduct/page.js
+============================================================
+export default function AddProductPage() {
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Add New Product</h1>
+      <p>This is where you can add a new product.</p>
+      {/* Add your product form here */}
+    </div>
+  );
+}
+
+============================================================
+FILE: src/app/(dashboard)/categories/page.js
+============================================================
+export default function CategoriesPage() {
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">View Categories</h1>
+      <p>This page will display all categories.</p>
+      {/* Add your categories list here */}
+    </div>
+  );
+}
+
+============================================================
+FILE: src/app/(dashboard)/products/page.js
+============================================================
+export default function ProductsPage() {
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">View Products</h1>
+      <p>This page will display all products.</p>
+      {/* Add your products list here */}
+    </div>
+  );
+}
+
+============================================================
+FILE: src/app/(dashboard)/layout.js
+============================================================
+import Sidebar from "@/features/dashboard/components/DashboardSidebar";
+
+export default function DashboardLayout({ children }) {
+   return (
+      <div className="flex h-screen">
+         <Sidebar />
+         <main className="flex-1 p-8 overflow-y-auto bg-gray-100">
+            {children}
+         </main>
+      </div>
+   );
+}
+
+
+============================================================
+FILE: src/app/(dashboard)/page.js
+============================================================
+import { redirect } from "next/navigation";
+
+export default function DashboardPage() {
+   return <div> dady page</div>;
+}
+
+
+============================================================
+FILE: src/app/(public)/checkout/CheckoutClientView.jsx
+============================================================
+"use client";
+
+import UserInfoForm from "./UserInfoForm";
+import OrderItems from "./OrderItems";
+import Button from "@/components/Button";
+import useCheckout from "../../../hooks/useCheckout";
+
+const CheckoutClientView = () => {
+   const { userInfo, items, handleInputChange, handleSubmit } = useCheckout();
+
+   return (
+      <form
+         onSubmit={handleSubmit}
+         className="mx-auto space-y-6"
+      >
+         <UserInfoForm userInfo={userInfo} onInputChange={handleInputChange} />
+         <OrderItems items={items} />
+         <Button type="submit" size="lg" className="w-full">
+            إرسال الطلب
+         </Button>
+      </form>
+   );
+};
+
+export default CheckoutClientView;
+
+
+============================================================
+FILE: src/app/(public)/checkout/OrderItems.jsx
+============================================================
+import CartDesktop from "@/features/public/cart/CartDesktop";
+import Image from "next/image";
+
+
+const OrderItems = () => {
+   return <CartDesktop showSummary={false} />;
+};
+
+export default OrderItems;
+
+
+============================================================
+FILE: src/app/(public)/checkout/OrderSummary.jsx
+============================================================
+const OrderSummary = ({ items, deliveryFee = 0 }) => {
+   const subtotal = items.reduce(
+      (sum, item) => sum + item.product.price * item.quantity,
+      0
+   );
+   const total = subtotal + deliveryFee;
+
+   return (
+      <div className="border border-gray-200 rounded-md p-4 space-y-2">
+         <h2 className="text-lg font-semibold">ملخص الفاتورة</h2>
+         <div className="flex justify-between">
+            <span>سعر المنتجات</span>
+            <span>{subtotal.toFixed(2)} جنيه</span>
+         </div>
+         <div className="flex justify-between">
+            <span>رسوم التوصيل</span>
+            <span>{deliveryFee.toFixed(2)} جنيه</span>
+         </div>
+         <hr />
+         <div className="flex justify-between font-bold text-lg">
+            <span>الإجمالي</span>
+            <span>{total.toFixed(2)} جنيه</span>
+         </div>
+      </div>
+   );
+};
+
+export default OrderSummary;
+
+
+============================================================
+FILE: src/app/(public)/checkout/page.js
+============================================================
+import Link from "next/link";
+import ArrowIcon from "../../../../public/icon/ArrowIcon";
+import CheckoutClientView from "./CheckoutClientView";
+
+const CheckoutPage = () => {
+   return (
+      <div className="p-4 mx-auto lg:w-[90%]">
+         <h1 className="flex items-center mb-6">
+            <Link
+               href="/menu"
+               className="bg-primary text-white w-9 h-9 rounded-sm flex items-center justify-center ml-3"
+            >
+               <ArrowIcon fill="white" />
+            </Link>
+            مراجعة الطلب
+         </h1>
+         <CheckoutClientView />
+      </div>
+   );
+};
+
+export default CheckoutPage;
+
+============================================================
+FILE: src/app/(public)/checkout/UserInfoForm.jsx
+============================================================
+import UserIcon from "../../../../public/icon/UserIcon";
+
+const FormInput = ({ icon, ...props }) => (
+   <label className="flex items-center bg-gray-100 border border-gray-300 rounded-md flex-1">
+      <div className="p-3">{icon}</div>
+      <input
+         {...props}
+         className="h-10 focus:outline-0 bg-transparent w-full"
+      />
+   </label>
+);
+
+const UserInfoForm = ({ userInfo, onInputChange }) => {
+   return (
+      <div className="space-y-4">
+         <div className="flex flex-col md:flex-row gap-4">
+            <FormInput
+               icon={<UserIcon />}
+               type="text"
+               name="name"
+               value={userInfo.name}
+               onChange={onInputChange}
+               readOnly
+            />
+            <FormInput
+               icon={<UserIcon />} // Replace with a more appropriate icon if available
+               type="text"
+               name="phone"
+               value={userInfo.phone}
+               onChange={onInputChange}
+               readOnly
+            />
+         </div>
+         <textarea
+            name="address"
+            value={userInfo.address}
+            onChange={onInputChange}
+            placeholder="أدخل عنوانك هنا..."
+            className="w-full p-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            rows="4"
+            required
+         />
+      </div>
+   );
+};
+
+export default UserInfoForm;
+
+
+============================================================
+FILE: src/app/(public)/login/page.jsx
+============================================================
+"use client";
+
+import Link from "next/link";
+import useLogin from "@/hooks/useLogin";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
+import FormWrapper from "@/components/auth/FormWrapper";
+import Alert from "@/components/ui/Alert";
+import AuthLink from "@/components/auth/AuthLink";
+
+const LoginPage = () => {
+   const {
+      formData,
+      errors,
+      isSubmitting,
+      showSuccessMessage,
+      handleChange,
+      handleSubmit,
+   } = useLogin();
+
+   return (
+      <FormWrapper title="تسجيل الدخول">
+         <Alert
+            type="success"
+            message={
+               showSuccessMessage &&
+               "تم إنشاء حسابك بنجاح! يمكنك الآن تسجيل الدخول."
+            }
+         />
+         <Alert type="error" message={errors.firebase} />
+
+         <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+            <Input
+               id="email"
+               name="email"
+               type="email"
+               label="البريد الإلكتروني"
+               value={formData.email}
+               onChange={handleChange}
+               error={errors.email}
+               autoComplete="email"
+               required
+            />
+            <div>
+               <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  label="كلمة المرور"
+                  value={formData.password}
+                  onChange={handleChange}
+                  error={errors.password}
+                  autoComplete="current-password"
+                  required
+               />
+               <div className="mt-1 text-right">
+                  <AuthLink href="/reset-password">
+                     <span className="text-xs">نسيت كلمة المرور؟</span>
+                  </AuthLink>
+               </div>
+            </div>
+            <Button type="submit" disabled={isSubmitting}>
+               {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+            </Button>
+         </form>
+         <div className="text-sm text-center">
+            <p className="text-gray-600">
+               ليس لديك حساب؟{" "}
+               <AuthLink href="/register">إنشاء حساب جديد</AuthLink>
+            </p>
+         </div>
+      </FormWrapper>
+   );
+};
+
+export default LoginPage;
+
+
+============================================================
+FILE: src/app/(public)/menu/loading.jsx
+============================================================
+export default function Loading() {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div
+        className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        role="status"
+      >
+        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+          Loading...
+        </span>
+      </div>
+    </div>
+  );
+}
+
+============================================================
+FILE: src/app/(public)/menu/page.js
+============================================================
+import Header from "@/features/public/header/Header";
+import MenuList from "@/features/public/menuList/MenuList";
+import CartDesktop from "@/features/public/cart/CartDesktop";
+import { getGroups } from "@/features/public/services/getGroups";
+import Categories from "@/features/public/categories/Categories";
+
+export default async function MenuPage() {
+   const groups = await getGroups();
+
+   return (
+      <div className="main-container w-full">
+         <div className="w-full md:flex md:gap-2.5 mt-4 mx-auto xl:w-[90%]">
+            <div className="md:w-2/3 lg:w-9/12 lg:flex">
+               <div className="lg:w-3/12 sticky top-[65px] z-10">
+                  <Categories groups={groups} />
+               </div>
+               <div className="lg:w-9/12">
+                  <MenuList groups={groups} />
+               </div>
+            </div>
+            <div className="md:w-1/3 lg:w-3/12 mt-4 md:mt-0">
+               <CartDesktop />
+            </div>
+         </div>
+      </div>
+   );
+}
+
+
+============================================================
+FILE: src/app/(public)/orders/page.jsx
+============================================================
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
+
+const OrdersPage = () => {
+  const { user } = useAuth();
+
+  return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="w-full max-w-4xl p-8 space-y-6 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-center text-gray-900">
+            طلباتي
+          </h2>
+          
+          <div className="space-y-4">
+            {/* Placeholder for when there are no orders */}
+            <div className="p-8 text-center bg-gray-100 rounded-md">
+              <p className="text-lg text-gray-600">
+                لا توجد طلبات سابقة
+              </p>
+              <p className="mt-2 text-sm text-gray-500">
+                عندما تقوم بإجراء طلبات، ستظهر هنا
+              </p>
+            </div>
+            
+            {/* This section would be replaced with actual orders data */}
+            <div className="mt-6 text-center">
+              <Link
+                href="/menu" 
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                تصفح القائمة
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+  );
+};
+
+export default OrdersPage;
+
+============================================================
+FILE: src/app/(public)/profile/page.jsx
+============================================================
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import LogoutButton from "@/components/LogoutButton";
+
+const ProfilePage = () => {
+  const { user } = useAuth();
+
+  return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-center text-gray-900">
+            الملف الشخصي
+          </h2>
+          
+          <div className="space-y-4">
+            {user?.photoURL && (
+              <div className="flex justify-center">
+                <img 
+                  src={user.photoURL} 
+                  alt="صورة المستخدم" 
+                  className="w-24 h-24 rounded-full"
+                />
+              </div>
+            )}
+            
+            <div className="p-4 bg-gray-100 rounded-md">
+              <p className="mb-2">
+                <span className="font-semibold">الاسم:</span> {user?.displayName || "غير محدد"}
+              </p>
+              <p className="mb-2">
+                <span className="font-semibold">البريد الإلكتروني:</span> {user?.email}
+              </p>
+              <p className="mb-2">
+                <span className="font-semibold">حالة التحقق من البريد الإلكتروني:</span> 
+                {user?.emailVerified ? "تم التحقق" : "لم يتم التحقق"}
+              </p>
+            </div>
+            
+            <div className="flex justify-center">
+              <LogoutButton />
+            </div>
+          </div>
+        </div>
+      </div>
+  );
+};
+
+export default ProfilePage;
+
+============================================================
+FILE: src/app/(public)/register/page.jsx
+============================================================
+"use client";
+
+import Link from "next/link";
+import useRegister from "@/hooks/useRegister";
+
+const RegisterPage = () => {
+   const { formData, errors, isSubmitting, handleChange, handleSubmit } = useRegister();
+
+   return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+         <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold text-center text-gray-900">
+               إنشاء حساب جديد
+            </h2>
+            {errors.firebase && (
+               <div className="p-3 text-sm text-white bg-red-500 rounded-md">
+                  {errors.firebase}
+               </div>
+            )}
+            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+               <div>
+                  <label
+                     htmlFor="name"
+                     className="block text-sm font-medium text-gray-700"
+                  >
+                     الاسم
+                  </label>
+                  <input
+                     id="name"
+                     name="name"
+                     type="text"
+                     required
+                     className={`w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                     value={formData.name}
+                     onChange={handleChange}
+                  />
+                  {errors.name && (
+                     <p className="mt-1 text-xs text-red-600">{errors.name}</p>
+                  )}
+               </div>
+               <div>
+                  <label
+                     htmlFor="email"
+                     className="block text-sm font-medium text-gray-700"
+                  >
+                     البريد الإلكتروني
+                  </label>
+                  <input
+                     id="email"
+                     name="email"
+                     type="email"
+                     autoComplete="email"
+                     required
+                     className={`w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                     value={formData.email}
+                     onChange={handleChange}
+                  />
+                  {errors.email && (
+                     <p className="mt-1 text-xs text-red-600">{errors.email}</p>
+                  )}
+               </div>
+               <div>
+                  <label
+                     htmlFor="password"
+                     className="block text-sm font-medium text-gray-700"
+                  >
+                     كلمة المرور
+                  </label>
+                  <input
+                     id="password"
+                     name="password"
+                     type="password"
+                     autoComplete="new-password"
+                     required
+                     className={`w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"}`}
+                     value={formData.password}
+                     onChange={handleChange}
+                  />
+                  {errors.password && (
+                     <p className="mt-1 text-xs text-red-600">
+                        {errors.password}
+                     </p>
+                  )}
+               </div>
+               <div>
+                  <label
+                     htmlFor="confirmPassword"
+                     className="block text-sm font-medium text-gray-700"
+                  >
+                     تأكيد كلمة المرور
+                  </label>
+                  <input
+                     id="confirmPassword"
+                     name="confirmPassword"
+                     type="password"
+                     autoComplete="new-password"
+                     required
+                     className={`w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.confirmPassword ? "border-red-500" : "border-gray-300"}`}
+                     value={formData.confirmPassword}
+                     onChange={handleChange}
+                  />
+                  {errors.confirmPassword && (
+                     <p className="mt-1 text-xs text-red-600">
+                        {errors.confirmPassword}
+                     </p>
+                  )}
+               </div>
+               <div>
+                  <button
+                     type="submit"
+                     className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                     disabled={isSubmitting}
+                  >
+                     {isSubmitting ? "جاري التسجيل..." : "إنشاء حساب"}
+                  </button>
+               </div>
+            </form>
+            <div className="text-sm text-center">
+               <p className="text-gray-600">
+                  لديك حساب بالفعل؟{" "}
+                  <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+                     تسجيل الدخول
+                  </Link>
+               </p>
+            </div>
+         </div>
+      </div>
+   );
+};
+
+export default RegisterPage;
+
+============================================================
+FILE: src/app/(public)/reset-password/page.jsx
+============================================================
+"use client";
+
+import Link from "next/link";
+import useResetPassword from "@/hooks/useResetPassword";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
+import FormWrapper from "@/components/auth/FormWrapper";
+import Alert from "@/components/ui/Alert";
+import AuthLink from "@/components/auth/AuthLink";
+
+const ResetPasswordPage = () => {
+   const { email, errors, isSubmitting, successMessage, handleChange, handleSubmit } = useResetPassword();
+
+   return (
+      <FormWrapper title="إعادة تعيين كلمة المرور">
+         <Alert type="success" message={successMessage} />
+         <Alert type="error" message={errors.firebase} />
+            
+            <p className="text-sm text-gray-600">
+               أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور الخاصة بك.
+            </p>
+            
+            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+               <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="البريد الإلكتروني"
+                  value={email}
+                  onChange={handleChange}
+                  error={errors.email}
+                  autoComplete="email"
+                  required
+               />
+               <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "جاري الإرسال..." : "إرسال رابط إعادة التعيين"}
+               </Button>
+            </form>
+            <div className="text-sm text-center">
+               <p className="text-gray-600">
+                  <AuthLink href="/login">العودة إلى تسجيل الدخول</AuthLink>
+               </p>
+            </div>
+      </FormWrapper>
+   );
+};
+
+export default ResetPasswordPage;
+
+============================================================
+FILE: src/app/api/auth/login/route.js
+============================================================
+import { NextResponse } from "next/server";
+
+export async function POST(request) {
+   try {
+      const { token } = await request.json();
+
+      if (!token) {
+         return NextResponse.json(
+            { error: "Token is required" },
+            { status: 400 }
+         );
+      }
+
+
+
+      const response = NextResponse.json({
+         success: true,
+         message: "Logged in successfully",
+      });
+
+      // تعيين الكوكي بالإعدادات المطلوبة
+      response.cookies.set({
+         name: "authToken",
+         value: token,
+         httpOnly: true,
+         secure: process.env.NODE_ENV === "production",
+         sameSite: "lax",
+         path: "/",
+         // يتم ترك 'domain' فارغًا ليعمل على localhost وعناوين IP المحلية تلقائيًا
+      });
+
+      return response;
+   } catch (error) {
+      console.error("Login API Error:", error);
+      return NextResponse.json(
+         { error: "Internal Server Error" },
+         { status: 500 }
+      );
+   }
+}
+
+
+============================================================
+FILE: src/app/api/db/route.js
+============================================================
+import { NextResponse } from "next/server";
+import { promises as fs } from "fs";
+import path from "path";
+
+export async function GET() {
+   const filePath = path.join(process.cwd(), "db.json");
+   try {
+      const data = await fs.readFile(filePath, "utf-8");
+      return NextResponse.json(JSON.parse(data));
+   } catch (error) {
+      return NextResponse.json(
+         { error: "Unable to read db.json" },
+         { status: 500 }
+      );
+   }
+}
+
+
+============================================================
+FILE: src/app/globals.css
+============================================================
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap");
+@import "tailwindcss";
+
+:root {
+   --background: #ffffff;
+   --foreground: #000000;
+   --header-bg-url: url("/664cbcc62ef68.png");
+}
+@theme inline {
+   --color-background: var(--background);
+   --color-foreground: var(--foreground);
+   --font-sans: var(--font-geist-sans);
+   --font-mono: var(--font-geist-mono);
+}
+
+body {
+   font-family: "IBM Plex Sans Arabic", sans-serif;
+   background: var(--background);
+   color: var(--foreground);
+}
+@theme {
+   --color-primary: #761005;
+   --color-primary-transparent: rgba(118, 16, 5, 0.7);
+}
+@layer utilities {
+   .header-bg-url {
+      background-image: var(--header-bg-url);
+   }
+}
+
+html {
+   scroll-behavior: smooth;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+   display: none;
+}
+.no-scrollbar {
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+}
+
+/* src/app/globals.css */
+
+
+============================================================
+FILE: src/app/layout.js
+============================================================
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
+
+const ibmArabic = IBM_Plex_Sans_Arabic({
+   subsets: ["arabic"],
+   weight: ["100", "200", "300", "400", "500", "600", "700"],
+   variable: "--font-ibm-arabic",
+   display: "swap",
+});
+
+const geistSans = Geist({
+   variable: "--font-geist-sans",
+   subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+   variable: "--font-geist-mono",
+   subsets: ["latin"],
+});
+
+export const metadata = {
+   title: "Create Next App",
+   description: "Ibn Elsham Restrunt is a resturant in Elsham, Egypt",
+};
+
+import CartMobileBar from "@/features/public/cart/CartMobileBar";
+import Header from "@/features/public/header/Header";
+
+export default function RootLayout({ children }) {
+   return (
+      <html lang="ar" dir="rtl">
+         <body
+            className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
+         >
+            <AuthProvider>
+               <Header />
+               {children}
+               <CartMobileBar />
+            </AuthProvider>
+         </body>
+      </html>
+   );
+}
+
+
+============================================================
+FILE: src/app/not-found.jsx
+============================================================
+export default function notFound() {
+   return <div>not Found</div>;
+}
+
+
+============================================================
+FILE: src/app/page.js
+============================================================
+import { redirect } from "next/navigation";
+
+export default function Home() {
+   redirect("/menu");
+}
+
+
+============================================================
+FILE: src/components/auth/AuthLink.jsx
+============================================================
+import Link from "next/link";
+
+const AuthLink = ({ href, children }) => {
+   return (
+      <Link
+         href={href}
+         className="font-medium text-indigo-600 hover:text-indigo-500"
+      >
+         {children}
+      </Link>
+   );
+};
+
+export default AuthLink;
+
+
+============================================================
+FILE: src/components/auth/FormWrapper.jsx
+============================================================
+import React from "react";
+
+const FormWrapper = ({ title, children }) => {
+   return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+         <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold text-center text-gray-900">
+               {title}
+            </h2>
+            {children}
+         </div>
+      </div>
+   );
+};
+
+export default FormWrapper;
+
+
+============================================================
+FILE: src/components/ui/Alert.jsx
+============================================================
+import React from "react";
+
+const Alert = ({ type, message }) => {
+   const baseClasses = "p-3 text-sm rounded-md";
+   const typeClasses = {
+      success: "text-white bg-green-500",
+      error: "text-white bg-red-500",
+   };
+
+   if (!message) return null;
+
+   return (
+      <div
+         className={`${baseClasses} ${typeClasses[type] || typeClasses.error}`}
+      >
+         {message}
+      </div>
+   );
+};
+
+export default Alert;
+
+
+============================================================
+FILE: src/components/ui/Button.jsx
+============================================================
+import React from "react";
+
+const Button = ({ type = "button", onClick, disabled, children }) => {
+   return (
+      <button
+         type={type}
+         onClick={onClick}
+         disabled={disabled}
+         className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed"
+      >
+         {children}
+      </button>
+   );
+};
+
+export default Button;
+
+
+============================================================
+FILE: src/components/ui/Input.jsx
+============================================================
+import React from "react";
+
+const Input = ({
+   id,
+   name,
+   type,
+   label,
+   value,
+   onChange,
+   error,
+   autoComplete,
+   required = false,
+}) => {
+   return (
+      <div>
+         <label
+            htmlFor={id}
+            className="block text-sm font-medium text-gray-700"
+         >
+            {label}
+         </label>
+         <input
+            id={id}
+            name={name}
+            type={type}
+            autoComplete={autoComplete}
+            required={required}
+            className={`w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${error ? "border-red-500" : "border-gray-300"}`}
+            value={value}
+            onChange={onChange}
+         />
+         {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      </div>
+   );
+};
+
+export default Input;
+
+
+============================================================
+FILE: src/components/Button.jsx
+============================================================
+"use client";
+
+const Button = ({ children, className, variant, size, ...props }) => {
+   const baseClasses =
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer";
+
+   const variants = {
+      default: "bg-primary text-primary-foreground hover:bg-primary/90",
+      destructive:
+         "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+      outline:
+         "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-foreground",
+      link: "text-primary underline-offset-4 hover:underline",
+   };
+
+   const sizes = {
+      default: "h-10 px-4 py-2",
+      sm: "h-9 rounded-md px-3",
+      lg: "h-11 rounded-md px-8",
+      icon: "h-10 w-10",
+      minIcon: "h-6 w-6",
+   };
+
+   const variantClasses = variants[variant] || variants.default;
+   const sizeClasses = sizes[size] || sizes.default;
+
+   return (
+      <button
+         className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`}
+         {...props}
+      >
+         {children}
+      </button>
+   );
+};
+
+export default Button;
+
+
+============================================================
+FILE: src/components/LogoutButton.jsx
+============================================================
+"use client";
+
+import useLogout from "@/hooks/useLogout";
+
+const LogoutButton = ({ className = "" }) => {
+  const { handleLogout } = useLogout();
+
+  return (
+    <button
+      onClick={handleLogout}
+      className={`px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${className}`}
+    >
+      تسجيل الخروج
+    </button>
+  );
+};
+
+export default LogoutButton;
+
+============================================================
+FILE: src/context/AuthContext.jsx
+============================================================
+"use client";
+
+import { createContext, useContext, useEffect, useState } from "react";
+import { auth } from "../lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
+
+// Create the authentication context
+const AuthContext = createContext();
+
+// Custom hook to use the auth context
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
+// Authentication provider component
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Subscribe to auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
+  // Value to be provided by the context
+  const value = {
+    user,
+    loading,
+    isAuthenticated: !!user,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
+};
+
+============================================================
+FILE: src/features/dashboard/components/DashboardSidebar.jsx
+============================================================
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+   { name: "إضافة منتجات", href: "/dashboard/addproduct" },
+   { name: "إضافة فئة", href: "/dashboard/addcategory" },
+   { name: "عرض الفئات", href: "/dashboard/categories" },
+   { name: "عرض المنتجات", href: "/dashboard/products" },
+];
+
+export default function Sidebar() {
+   const pathname = usePathname();
+
+   return (
+      <aside className="w-55 bg-white shadow-md p-5">
+         <div className="p-2">
+            <h2 className="text-xl font-bold">لوحة التحكم</h2>
+         </div>
+         <nav>
+            <ul className="mt-4 ">
+               {links.map((link) => (
+                  <li key={link.name}>
+                     <Link href={link.href}>
+                        <p
+                           className={`block p-2 my-3 hover:bg-indigo-800 hover:text-white ${
+                              pathname === link.href
+                                 ? "bg-indigo-800 text-white"
+                                 : ""
+                           } rounded-md`}
+                        >
+                           {link.name}
+                        </p>
+                     </Link>
+                  </li>
+               ))}
+            </ul>
+         </nav>
+      </aside>
+   );
+}
+
+
+============================================================
+FILE: src/features/dashboard/components/FileUpload.jsx
+============================================================
+"use client";
+
+export const FileUpload = ({
+   preview,
+   fileInputRef,
+   handleFileChange,
+   handleButtonClick,
+   file,
+}) => {
+   return (
+      <div className="mt-3">
+         <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="hidden"
+            accept="image/*"
+         />
+
+         <button
+            type="button"
+            onClick={handleButtonClick}
+            className="flex flex-col items-center justify-center border-2 border-dashed border-white p-4 rounded-lg cursor-pointer hover:bg-indigo-400 transition-colors w-full"
+         >
+            {preview ? (
+               <img
+                  src={preview}
+                  alt="معاينة الصورة"
+                  className="w-32 h-32 object-cover rounded-md mb-2"
+               />
+            ) : (
+               <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+               >
+                  <path
+                     strokeLinecap="round"
+                     strokeLinejoin="round"
+                     strokeWidth={2}
+                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+               </svg>
+            )}
+
+            <span className="text-white mt-2">
+               {file ? file.name : "اضغط لرفع صورة"}
+            </span>
+         </button>
+      </div>
+   );
+};
+
+
+============================================================
+FILE: src/features/dashboard/hooks/useFileUpload.js
+============================================================
+"use client";
+
+import { useState, useRef, useCallback } from "react";
+
+export const useFileUpload = () => {
+   const [file, setFile] = useState(null);
+   const [preview, setPreview] = useState(null);
+   const fileInputRef = useRef(null);
+
+   const handleFileChange = useCallback((e) => {
+      const selectedFile = e.target.files[0];
+      if (selectedFile) {
+         setFile(selectedFile);
+
+         const reader = new FileReader();
+         reader.onloadend = () => {
+            setPreview(reader.result);
+         };
+         reader.readAsDataURL(selectedFile);
+      }
+   }, []);
+
+   const handleButtonClick = useCallback(() => {
+      fileInputRef.current?.click();
+   }, []);
+
+   return {
+      file,
+      preview,
+      fileInputRef,
+      handleFileChange,
+      handleButtonClick,
+   };
+};
+export default useFileUpload;
+
+============================================================
+FILE: src/hooks/useCheckout.js
+============================================================
+import { useState } from "react";
+import useCartStore from "../store/cartStore";
+
+const useCheckout = () => {
+   const { items, clearCart } = useCartStore();
+   const [userInfo, setUserInfo] = useState({
+      name: "Gaafer Alwakeil",
+      phone: "01023456789",
+      address: "",
+   });
+
+   const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setUserInfo((prevInfo) => ({
+         ...prevInfo,
+         [name]: value,
+      }));
+   };
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      const subtotal = items.reduce(
+         (sum, item) => sum + item.product.price * item.quantity,
+         0
+      );
+      const deliveryFee = 30;
+      const total = subtotal + deliveryFee;
+
+      const orderData = {
+         userInfo,
+         items,
+         orderSummary: {
+            subtotal,
+            deliveryFee,
+            total,
+         },
+      };
+
+      console.log(orderData);
+      clearCart();
+   };
+
+   return { userInfo, items, handleInputChange, handleSubmit };
+};
+
+export default useCheckout;
+
+
+============================================================
+FILE: src/hooks/useLogin.js
+============================================================
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { auth } from "../lib/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getCurrentUser } from "@/utils/auth";
+
+const useLogin = () => {
+   const router = useRouter();
+   const searchParams = useSearchParams();
+   const [formData, setFormData] = useState({
+      email: "",
+      password: "",
+   });
+   const [errors, setErrors] = useState({});
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+   // Check for registered=true query param on component mount
+   useEffect(() => {
+      if (searchParams.get("registered") === "true") {
+         setShowSuccessMessage(true);
+      }
+
+      // Check for callbackUrl to redirect after login
+      const callbackUrl = searchParams.get("callbackUrl");
+      if (callbackUrl) {
+         // Store the callback URL in session storage to use after successful login
+         sessionStorage.setItem("callbackUrl", callbackUrl);
+      }
+   }, [searchParams]);
+
+   const validate = () => {
+      const newErrors = {};
+      if (!formData.email) {
+         newErrors.email = "البريد الإلكتروني مطلوب.";
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+         newErrors.email = "صيغة البريد الإلكتروني غير صحيحة.";
+      }
+      if (!formData.password) {
+         newErrors.password = "كلمة المرور مطلوبة.";
+      }
+      return newErrors;
+   };
+
+   const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      // Clear success message when user starts typing
+      if (showSuccessMessage) {
+         setShowSuccessMessage(false);
+      }
+   };
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      const validationErrors = validate();
+      setErrors(validationErrors);
+
+      if (Object.keys(validationErrors).length === 0) {
+         setIsSubmitting(true);
+         try {
+            // Sign in with email and password
+            const userCredential = await signInWithEmailAndPassword(
+               auth,
+               formData.email,
+               formData.password
+            );
+
+            // Get the user token
+            console.log(getCurrentUser());
+            const token = await userCredential.user.getIdToken();
+
+            // 3. إرسال التوكن إلى API Route لإنشاء الكوكي الآمنة
+            const response = await fetch("/api/auth/login", {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify({ token: token }),
+            });
+
+            if (!response.ok) {
+               const data = await response.json();
+               throw new Error(data.error || "Failed to set session cookie");
+            }
+
+            // Check if there's a callback URL to redirect to
+            const callbackUrl = sessionStorage.getItem("callbackUrl");
+            if (callbackUrl) {
+               sessionStorage.removeItem("callbackUrl"); // Clear the stored URL
+               router.push(callbackUrl);
+            } else {
+               // Redirect to dashboard or home page after successful login
+               router.push("/menu");
+            }
+         } catch (error) {
+            // Handle specific Firebase errors
+            let errorMessage =
+               "حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.";
+
+            if (
+               error.code === "auth/user-not-found" ||
+               error.code === "auth/wrong-password"
+            ) {
+               errorMessage = "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            } else if (error.code === "auth/too-many-requests") {
+               errorMessage =
+                  "تم تعطيل الوصول إلى هذا الحساب مؤقتًا بسبب محاولات تسجيل دخول متكررة. يمكنك استعادة الوصول على الفور عن طريق إعادة تعيين كلمة المرور الخاصة بك.";
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            } else {
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            }
+
+            console.error("Firebase error:", error);
+         } finally {
+            setIsSubmitting(false);
+         }
+      }
+   };
+
+   return {
+      formData,
+      errors,
+      isSubmitting,
+      showSuccessMessage,
+      handleChange,
+      handleSubmit,
+   };
+};
+
+export default useLogin;
+
+
+============================================================
+FILE: src/hooks/useLogout.js
+============================================================
+"use client";
+
+import { useRouter } from "next/navigation";
+import { auth } from "../lib/firebase";
+import { signOut } from "firebase/auth";
+import Cookies from 'js-cookie';
+
+const useLogout = () => {
+  const router = useRouter();
+  
+  const handleLogout = async () => {
+    try {
+      // Sign out from Firebase
+      await signOut(auth);
+      
+      // Remove the auth token cookie
+      Cookies.remove('authToken');
+      
+      // Redirect to login page
+      router.push('/login');
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  return { handleLogout };
+};
+
+export default useLogout;
+
+============================================================
+FILE: src/hooks/useRegister.js
+============================================================
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { auth } from "../lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
+const useRegister = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validate = () => {
+    const newErrors = {};
+    
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "الاسم مطلوب.";
+    }
+    
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = "البريد الإلكتروني مطلوب.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "صيغة البريد الإلكتروني غير صحيحة.";
+    }
+    
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = "كلمة المرور مطلوبة.";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.";
+    }
+    
+    // Confirm password validation
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "تأكيد كلمة المرور مطلوب.";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "كلمات المرور غير متطابقة.";
+    }
+    
+    return newErrors;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      setIsSubmitting(true);
+      try {
+        // Create user with email and password
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+
+        // Update user profile with name
+        await updateProfile(userCredential.user, {
+          displayName: formData.name,
+        });
+
+        // Redirect to login page with success message
+        router.push("/login?registered=true");
+      } catch (error) {
+        // Handle specific Firebase errors
+        let errorMessage = "حدث خطأ أثناء إنشاء الحساب. يرجى المحاولة مرة أخرى.";
+        
+        if (error.code === "auth/email-already-in-use") {
+          errorMessage = "البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.";
+          setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+        } else if (error.code === "auth/weak-password") {
+          errorMessage = "كلمة المرور ضعيفة جدًا. يرجى اختيار كلمة مرور أقوى.";
+          setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+        } else {
+          setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+        }
+        
+        console.error("Firebase error:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  return { formData, errors, isSubmitting, handleChange, handleSubmit };
+};
+
+export default useRegister;
+
+============================================================
+FILE: src/hooks/useResetPassword.js
+============================================================
+"use client";
+
+import { useState } from "react";
+import { auth } from "../lib/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
+
+const useResetPassword = () => {
+   const [email, setEmail] = useState("");
+   const [errors, setErrors] = useState({});
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [successMessage, setSuccessMessage] = useState("");
+
+   const validate = () => {
+      const newErrors = {};
+      if (!email) {
+         newErrors.email = "البريد الإلكتروني مطلوب.";
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+         newErrors.email = "صيغة البريد الإلكتروني غير صحيحة.";
+      }
+      return newErrors;
+   };
+
+   const handleChange = (e) => {
+      setEmail(e.target.value);
+      // Clear any previous success message or errors when user types
+      if (successMessage) setSuccessMessage("");
+      if (errors.email || errors.firebase) setErrors({});
+   };
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      const validationErrors = validate();
+      setErrors(validationErrors);
+
+      if (Object.keys(validationErrors).length === 0) {
+         setIsSubmitting(true);
+         try {
+            // Send password reset email
+            await sendPasswordResetEmail(auth, email);
+            
+            // Show success message
+            setSuccessMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد الخاص بك.");
+            
+            // Clear email field
+            setEmail("");
+         } catch (error) {
+            // Handle specific Firebase errors
+            let errorMessage = "حدث خطأ أثناء إرسال رابط إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.";
+            
+            if (error.code === "auth/user-not-found") {
+               // For security reasons, we don't want to reveal if an email exists or not
+               // So we show the same success message even if the email doesn't exist
+               setSuccessMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد الخاص بك.");
+               setEmail("");
+            } else if (error.code === "auth/invalid-email") {
+               errorMessage = "صيغة البريد الإلكتروني غير صحيحة.";
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            } else if (error.code === "auth/too-many-requests") {
+               errorMessage = "تم إرسال العديد من الطلبات من هذا الجهاز. يرجى المحاولة مرة أخرى لاحقًا.";
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            } else {
+               setErrors((prev) => ({ ...prev, firebase: errorMessage }));
+            }
+            console.error("Firebase error:", error);
+         } finally {
+            setIsSubmitting(false);
+         }
+      }
+   };
+
+   return { email, errors, isSubmitting, successMessage, handleChange, handleSubmit };
+};
+
+export default useResetPassword;
+
+============================================================
+FILE: src/store/cartStore.js
+============================================================
+import { create } from "zustand";
+
+const useCartStore = create((set, get) => ({
+   items: [],
+   addToCart: (product, quantity = 1, notes = "") => {
+      const items = get().items;
+      const existingIndex = items.findIndex(
+         (item) => item.product.id === product.id
+      );
+      if (existingIndex !== -1) {
+         const updatedItems = [...items];
+         updatedItems[existingIndex] = {
+            ...updatedItems[existingIndex],
+            quantity: updatedItems[existingIndex].quantity + quantity,
+            notes: notes || updatedItems[existingIndex].notes,
+         };
+         set({ items: updatedItems });
+      } else {
+         set({
+            items: [...items, { product, quantity, notes }],
+         });
+      }
+   },
+   updateQuantity: (productId, quantity) => {
+      set((state) => ({
+         items: state.items.map((item) =>
+            item.product.id === productId
+               ? { ...item, quantity: Math.max(1, quantity) }
+               : item
+         ),
+      }));
+   },
+   removeFromCart: (productId) => {
+      set((state) => ({
+         items: state.items.filter((item) => item.product.id !== productId),
+      }));
+   },
+   clearCart: () => set({ items: [] }),
+}));
+
+export default useCartStore;
+
+
+============================================================
+FILE: src/utils/auth.js
+============================================================
+import { auth } from "../lib/firebase";
+import Cookies from "js-cookie";
+
+/**
+ * Check if the user is authenticated
+ * @returns {boolean} True if the user is authenticated, false otherwise
+ */
+export const isAuthenticated = () => {
+   // Check if there's a token in cookies
+   const token = Cookies.get("authToken");
+   return !!token;
+};
+
+/**
+ * Get the current authenticated user
+ * @returns {Promise<Object|null>} The current user or null if not authenticated
+ */
+export const getCurrentUser = () => {
+   return new Promise((resolve, reject) => {
+      // Listen for auth state changes
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+         unsubscribe(); // Unsubscribe once we get the auth state
+         resolve(user);
+      }, reject);
+   });
+};
+
+/**
+ * Get user data from the current authenticated user
+ * @returns {Object|null} User data or null if not authenticated
+ */
+export const getUserData = async () => {
+   const user = await getCurrentUser();
+
+   if (!user) return null;
+   return {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+   };
+};
+
+
+============================================================
+FILE: src/utils/authUtils.js
+============================================================
+import { auth } from "../lib/firebase";
+import { signOut } from "firebase/auth";
+import Cookies from 'js-cookie';
+
+/**
+ * Sign out the current user and remove authentication tokens
+ * @returns {Promise<boolean>} Returns true if logout was successful, false otherwise
+ */
+export const logout = async () => {
+  try {
+    // Sign out from Firebase
+    await signOut(auth);
+    
+    // Remove the auth token cookie
+    Cookies.remove('authToken');
+    
+    return true;
+  } catch (error) {
+    console.error("Error during logout:", error);
+    return false;
+  }
+};
+
+/**
+ * Check if the current session is authenticated
+ * @returns {boolean}
+ */
+export const isAuthenticated = () => {
+  const token = Cookies.get('authToken');
+  return !!token;
+};
+
+============================================================
+FILE: src/middleware.js
+============================================================
+import { NextResponse } from "next/server";
+
+// This function can be marked `async` if using `await` inside
+export function middleware(request) {
+   // Get the pathname of the request
+   const path = request.nextUrl.pathname;
+   console.log(request);
+   // Define public paths that don't require authentication
+   const isAuthPublicPath =
+      path === "/login" ||
+      path === "/register" ||
+      path === "/reset-password" ||
+      path === "/";
+   const isPublicPath = isAuthPublicPath || path === "/menu";
+
+   // Get the token from the cookies
+   const token = request.cookies.get("authToken")?.value || "";
+
+   // If the path is public and the user is logged in, redirect to the menu page
+   if (isAuthPublicPath && token) {
+      return NextResponse.redirect(new URL("/menu", request.url));
+   }
+
+   // If the path is not public and the user is not logged in, redirect to the login page
+   if (!isPublicPath && !token) {
+      // Store the original URL to redirect back after login
+      const url = new URL("/login", request.url);
+      url.searchParams.set("callbackUrl", path);
+      return NextResponse.redirect(url);
+   }
+
+   return NextResponse.next();
+}
+
+// See "Matching Paths" below to learn more
+export const config = {
+   matcher: [
+      // Match all paths except for:
+      // - API routes (/api/...)
+      // - Static files routes (/_next/...)
+      // - Public files (files with extensions like .png, .jpg, .ico, etc.)
+      "/((?!api|_next/static|_next/image|.*\\..*).*)",
+   ],
+};
+
+
+============================================================
+FILE: db.json
+============================================================
+{
+   "groups": [
+      {
+         "id": "11b89031-9b92-4c25-bee6-0b4f2799ce2d",
+         "name": "إعلانات",
+         "image_url": null,
+         "products": [
+            {
+               "id": "1a9136c3-0d2e-462b-9b79-01f3780194ae",
+               "categoryId": "11b89031-9b92-4c25-bee6-0b4f2799ce2d",
+               "name": "..",
+               "description": "..",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/1a9136c3-0d2e-462b-9b79-01f3780194ae/687b92a56454b.png",
+               "price": 0,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+         "name": "شاورما سجق",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f24db966-110c-4338-aa4c-000cab700f32/683ef721e163f.jpeg",
+         "products": [
+            {
+               "id": "4c8f31c7-d2b6-4d4e-a9a8-10c75bba8cc1",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "شاورما سجق شيك",
+               "description": "عبارة عن شاورما سجق مع صوص كوكتيل +طماطم +بطاطا فعلبة واحدة",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4c8f31c7-d2b6-4d4e-a9a8-10c75bba8cc1/6837170ce8682.jpeg",
+               "price": 95,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "15b8b21c-7c1d-4f3c-ac41-4e287279d021",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "ساندوتش شاورما سجق",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/15b8b21c-7c1d-4f3c-ac41-4e287279d021/685ffb6f1cf46.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  { "id": "variant_s_sausage_saj", "name": "صاج", "price": 85 },
+                  {
+                     "id": "variant_s_sausage_kaiser",
+                     "name": "كايزر",
+                     "price": 75
+                  }
+               ]
+            },
+            {
+               "id": "dd36487a-ec4b-4786-acb8-2749fff71bad",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "فته شاورما سجق",
+               "description": "فته شاورما سجق",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/dd36487a-ec4b-4786-acb8-2749fff71bad/683ef74fe75b9.jpeg",
+               "price": 120,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "f24db966-110c-4338-aa4c-000cab700f32",
+               "categoryId": "e56d66b7-bb4e-44c0-a29f-56ffe6b08067",
+               "name": "شاورما سجق بالوزن",
+               "description": "تقدم مع صوص كوكتيل +كلوسلو +مخلل خيار +طماطم +بطاطا",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f24db966-110c-4338-aa4c-000cab700f32/683ef721e163f.jpeg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_w_sausage_250",
+                     "name": "ربع كيلو",
+                     "price": 180
+                  },
+                  {
+                     "id": "variant_w_sausage_500",
+                     "name": "نصف كيلو",
+                     "price": 350
+                  },
+                  {
+                     "id": "variant_w_sausage_1000",
+                     "name": "كيلو",
+                     "price": 680
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+         "name": "شوربة و مقبلات",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4/65dde0dcaf9a7.jpeg",
+         "products": [
+            {
+               "id": "08cc9eab-efe5-44ab-b1a4-6610b59cb6fe",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "مخلل خيار كبير",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/08cc9eab-efe5-44ab-b1a4-6610b59cb6fe/685ff9fc2e061.png",
+               "price": 80,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "dec82047-99b4-548e-bebb-b9c9ba0fe3ab",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "بطاطس مدوره",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/ZpHebw9fKMg_OM5sKZITsRE4_0vA9DmI.jpg",
+               "price": 55,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "e10cc09e-7627-56cb-9916-16f9c79a22b5",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "طبق حمص شاورما فراخ",
+               "description": "(صوص حمص يعلوه شرائح الشاورما فراخ الذهبية لذيذه )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/o3HUkJUzWUCQv99jFdtb8_BE-b1xgdQx.jpg",
+               "price": 220,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "3e3e2bba-6064-5afa-ad6d-8f571c5af3c9",
+               "categoryId": "d4fd535d-5bb5-4312-9ad3-5f4424d1bcd4",
+               "name": "سمبوسك جبنه سوريه",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/3e3e2bba-6064-5afa-ad6d-8f571c5af3c9/68613544998d0.png",
+               "price": 25,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+         "name": "عروض توفير ابن الشام",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/2072b7d1-675b-58fc-9cdb-71cd2db616f1/65dde044d29f5.jpeg",
+         "products": [
+            {
+               "id": "065c3368-5f51-4a1b-a6a9-391be9ce7848",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "صينيه الحوت",
+               "description": "3سيخ كفته لحم مشوي+3 سيخ نقانق +3 ورك مشوي +بصل وبندوره مشوي+كيلو ونص ارز+ثوميه ص+حمص ص+سلطه خضرا ص+مخلل مشكل ص (تكفي من 4 الي 5 اشخاص)",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/065c3368-5f51-4a1b-a6a9-391be9ce7848/66fadb9a94ab9.jpeg",
+               "price": 699,
+               "price_before_discount": 750,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "4bd29e71-848c-5569-83db-e62c59d0cea8",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "صينيه السلطان",
+               "description": "فرخه على الفحم + نص كيلو شيش + نص كيلو كفته + نص كيلو كباب ( شقف ) + 2 كيلو ارز مطهي + 6 سلطه مشكلين ( طحينه + متبل + سلطه خضراء + توميه + زبادي ) + 4 ربطه عيش + 10 محمرة مشويه+ 1 كنافه ( تكفي من 6 الي 7 افراد )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4bd29e71-848c-5569-83db-e62c59d0cea8/686191832cbcb.jpeg",
+               "price": 1999,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "cf18c9ed-d698-5e8f-8440-919c00ee6c5d",
+               "categoryId": "2072b7d1-675b-58fc-9cdb-71cd2db616f1",
+               "name": "هاتريك 3 شاورما فراخ +بطاطس",
+               "description": "3 شاورما فراخ عيش صاج",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/cf18c9ed-d698-5e8f-8440-919c00ee6c5d/6542817be249a.jpeg",
+               "price": 315,
+               "price_before_discount": 340,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "01e3f823-08e2-5ef9-8e93-f805ebb38e38",
+         "name": "وجبات لحم مشوية",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/01e3f823-08e2-5ef9-8e93-f805ebb38e38/65dddf02e14c3.jpeg",
+         "products": [
+            {
+               "id": "c45f4933-6a36-5411-8111-d5a2377e024e",
+               "categoryId": "01e3f823-08e2-5ef9-8e93-f805ebb38e38",
+               "name": "وجبه مشوي مشكل",
+               "description": "( 4 اسياخ من كباب وكفته لحم وشيش طاوق صدور وكفته فراخ تقدم مع سلطه وحمص وعيش ومخلل )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/DQ60LQCBC2O4iC0OaCkB_BxetfSB1apM.jpg",
+               "price": 395,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "f74f9970-2d2c-533c-99cb-8bf52eb4a3ac",
+         "name": "وجبات لحم مدخن او فراخ مدخنة",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f74f9970-2d2c-533c-99cb-8bf52eb4a3ac/65ddd9ca7611e.jpeg",
+         "products": [
+            {
+               "id": "a35c8c01-8dcb-44d4-9494-16c43b2dd1b9",
+               "categoryId": "f74f9970-2d2c-533c-99cb-8bf52eb4a3ac",
+               "name": "وجبة وركين مدخنة +ارز",
+               "description": "تقدم مع ارز وبطاطا وتومية عادى وتومية سباسى وعيش",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/a35c8c01-8dcb-44d4-9494-16c43b2dd1b9/6869789149e96.png",
+               "price": 245,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "5dd9ceef-5332-544e-8c57-d8b8c4bad2d0",
+         "name": "السلطات",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/5dd9ceef-5332-544e-8c57-d8b8c4bad2d0/65dde1293e2cc.jpeg",
+         "products": [
+            {
+               "id": "79109e4d-3060-5b5d-8cd5-c90cc6475b34",
+               "categoryId": "5dd9ceef-5332-544e-8c57-d8b8c4bad2d0",
+               "name": "حمص",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/TEykm-HYf8AjH-8MYEbzolCGKBxZy4nl.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  { "id": "variant_hummus_small", "name": "صغير", "price": 45 },
+                  { "id": "variant_hummus_large", "name": "كبير", "price": 80 }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "ec61b6f7-facd-5ca9-ace6-fac688faf683",
+         "name": "وجبات فراخ مشوية",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/ec61b6f7-facd-5ca9-ace6-fac688faf683/65dddab63d60b.jpeg",
+         "products": [
+            {
+               "id": "d9bbc7c3-9edf-55be-b03c-1bf90faf0543",
+               "categoryId": "ec61b6f7-facd-5ca9-ace6-fac688faf683",
+               "name": "ربع فرخه مشويه ع الفحم (ورك)",
+               "description": "( ورك مشوي متبل طازج علي فحم تقدم مع بطاطس وارز وصوص توميه وعيش ومخلل)",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/d9bbc7c3-9edf-55be-b03c-1bf90faf0543/686019a482ccb.png",
+               "price": 120,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "494141ff-f85e-567c-814c-911b41a82056",
+         "name": "مشويات فراخ",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/494141ff-f85e-567c-814c-911b41a82056/65dddee27a771.jpeg",
+         "products": [
+            {
+               "id": "36d3339b-842c-5de3-ad1d-ac5732c9cb4c",
+               "categoryId": "494141ff-f85e-567c-814c-911b41a82056",
+               "name": "فرخه ع الفحم",
+               "description": "( فراخ متبل طازج مشويه ع فحم تقدم مع بطاطس وصوص توميه وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/TCO5GVJaE4TW0Wz-Tz4NZgmfrSzwcyXv.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_grill_chicken_half",
+                     "name": "نصف",
+                     "price": 220
+                  },
+                  {
+                     "id": "variant_grill_chicken_full",
+                     "name": "كاملة",
+                     "price": 435
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "3d0c758a-d390-5a14-b7b7-9cebd4384ac7",
+         "name": "طواجن",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/3d0c758a-d390-5a14-b7b7-9cebd4384ac7/65dddb4c7b4a9.jpeg",
+         "products": [
+            {
+               "id": "9245465b-769c-5365-8b5c-0b3438bbf057",
+               "categoryId": "3d0c758a-d390-5a14-b7b7-9cebd4384ac7",
+               "name": "طاجن كفته بالطماطم (1/4 كيلو)",
+               "description": "( لحم متبل مفرود داخل طاجن يعلوه شرائح طماطم وفلفل الاخضر يقدم مع (ليمون ومخلل وعيش)",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/-lw-rt6mddbejy89Ts8PcXYo69DT6eTl.jpg",
+               "price": 275,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "6339a534-d85d-565a-8152-8a6a47fc3d65",
+         "name": "مشويات لحم بالكيلو",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/6339a534-d85d-565a-8152-8a6a47fc3d65/65ddda75cfe9d.jpeg",
+         "products": [
+            {
+               "id": "2356a1bc-b6aa-5b6c-bfd7-87caec2fccdd",
+               "categoryId": "6339a534-d85d-565a-8152-8a6a47fc3d65",
+               "name": "كباب (شقف)",
+               "description": "(اسياخ من كباب مشويه متبل بطريقه مميزه تقدم مع عيش وبصل وطماطم وفلفل ومحمره مشويه )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/FffuqiPtC0xIcalHnlsd99WRA01TcmF5.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_kebab_250",
+                     "name": "ربع كيلو",
+                     "price": 350
+                  },
+                  {
+                     "id": "variant_kebab_500",
+                     "name": "نصف كيلو",
+                     "price": 700
+                  },
+                  { "id": "variant_kebab_1000", "name": "كيلو", "price": 1350 }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "93322e95-c843-5e89-9215-c76bca438f58",
+         "name": "شاورما لحمة",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/93322e95-c843-5e89-9215-c76bca438f58/65dddcbca537b.jpeg",
+         "products": [
+            {
+               "id": "86d986aa-6275-55b9-ac20-bc24c99a0473",
+               "categoryId": "93322e95-c843-5e89-9215-c76bca438f58",
+               "name": "ساندوتش شاورما لحم",
+               "description": "(شرائح شاورما لحمه مع وشرائح بصل بقدونس وطماطم ومخلل لفت داخل الساندوتش)",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/0bXPqU473MMxMIiMYyFIBk22L7AOwKGg.jpg",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_m_shawarma_saj",
+                     "name": "صاج",
+                     "price": 125
+                  },
+                  {
+                     "id": "variant_m_shawarma_kaiser",
+                     "name": "كايزر",
+                     "price": 115
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+         "name": "شاورما فراخ",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/f70943e0-c09f-534a-9f11-a7de5f3c2097/65dde16a95a0c.jpeg",
+         "products": [
+            {
+               "id": "c6ce57f6-4bcb-49cd-a0df-e04dce1fe3e4",
+               "categoryId": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+               "name": "شاورما شيك فراخ",
+               "description": "75 جرام شاورما مع بطاطا وتوميه ومخلل ف علبه",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/c6ce57f6-4bcb-49cd-a0df-e04dce1fe3e4/6671eefbcc5dd.jpeg",
+               "price": 85,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "54185129-a05d-5f34-aab9-e96e8f31bd1f",
+               "categoryId": "f70943e0-c09f-534a-9f11-a7de5f3c2097",
+               "name": "تورته شاورما فراخ",
+               "description": "( شرائح شاورما فراخ ذهبيه تتكون من 22 قطعه تكفي 4 اشخاص 2 دور/او44 قطعه تكفي 8 اشخاص 3 دور تقدم مع شرائح بطاطس وتوميه وكلو سلو ومخلل )",
+               "image_url": "https://media-files.tryordersystem.com/ibnsham/1/uPLcYtNjQzo8gJskwYGxKRle4K5H4kAk.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_c_shawarma_cake_s",
+                     "name": "دورين (تكفي 4 أفراد)",
+                     "price": 450
+                  },
+                  {
+                     "id": "variant_c_shawarma_cake_l",
+                     "name": "3 أدوار (تكفي 8 أفراد)",
+                     "price": 850
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+         "name": "فراخ بروستد",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/783f09c2-d665-5bc6-9331-6685cf4c7727/65dde1c0c646e.jpeg",
+         "products": [
+            {
+               "id": "6e547c01-5ce5-57c9-97c1-7c1ddcd9a2d5",
+               "categoryId": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+               "name": "فرخه بروستد ٨ قطع",
+               "description": "( قطع فراخ مقليه المقرمشه ذهبيه اللون تقدم مع بطاطس وصوص توميه وتوميه اسبايسي ومخلل وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/6e547c01-5ce5-57c9-97c1-7c1ddcd9a2d5/6475e66079b50.jpeg",
+               "price": 475,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            },
+            {
+               "id": "51129a82-7c0b-5069-910c-4f6cb38d5446",
+               "categoryId": "783f09c2-d665-5bc6-9331-6685cf4c7727",
+               "name": "وجبه 3 قطع فراخ بروستد",
+               "description": "( 3 قطع فراخ بروستد المقرمشه ذهبيه اللون تقدم مع بطاطس ارز بسمتي صوص توميه ومخلل وعيش )",
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/51129a82-7c0b-5069-910c-4f6cb38d5446/64aeaba4a27fa.jpeg",
+               "price": 155,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": []
+            }
+         ]
+      },
+      {
+         "id": "4d842955-ddf1-5675-a9e2-14dc9137ffca",
+         "name": "شاورما ميكس",
+         "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/4d842955-ddf1-5675-a9e2-14dc9137ffca/65dddf5709fbc.png",
+         "products": [
+            {
+               "id": "42a3281b-e8ec-53c4-b28b-87c4abde1367",
+               "categoryId": "4d842955-ddf1-5675-a9e2-14dc9137ffca",
+               "name": "فته شاورما ميكس",
+               "description": null,
+               "image_url": "https://media-files.tryordersystem.com/menu/ibnsham/42a3281b-e8ec-53c4-b28b-87c4abde1367/686032c099774.png",
+               "price": null,
+               "price_before_discount": null,
+               "out_of_stock": false,
+               "variants": [
+                  {
+                     "id": "variant_mix_fatteh_s",
+                     "name": "عادي",
+                     "price": 130
+                  },
+                  { "id": "variant_mix_fatteh_l", "name": "كبير", "price": 150 }
+               ]
+            }
+         ]
+      }
+   ] 
+}
+
+============================================================
+FILE: eslint.config.mjs
+============================================================
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const eslintConfig = [...compat.extends("next/core-web-vitals")];
+
+export default eslintConfig;
+
+
+============================================================
+FILE: jsconfig.json
+============================================================
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+
+
+============================================================
+FILE: next.config.mjs
+============================================================
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+   images: {
+      remotePatterns: [
+         {
+            protocol: "https",
+            hostname: "media-files.tryordersystem.com",
+            port: "", 
+            pathname: "/**",
+         },
+      ],
+   },
+};
+
+export default nextConfig;
+
+
+============================================================
+FILE: package.json
+============================================================
+{
+   "name": "menu-app",
+   "version": "0.1.0",
+   "private": true,
+   "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "json-server": "json-server --watch db.json --port 3001"
+   },
+   "dependencies": {
+      "@fortawesome/fontawesome-svg-core": "^6.7.2",
+      "@fortawesome/free-solid-svg-icons": "^6.7.2",
+      "@fortawesome/react-fontawesome": "^0.2.2",
+      "@tanstack/react-query": "^5.83.0",
+      "firebase": "^12.0.0",
+      "js-cookie": "^3.0.5",
+      "json-server": "^1.0.0-beta.3",
+      "next": "15.3.5",
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0",
+      "zustand": "^5.0.7"
+   },
+   "devDependencies": {
+      "@eslint/eslintrc": "^3",
+      "@tailwindcss/postcss": "^4.1.11",
+      "autoprefixer": "^10.4.21",
+      "eslint": "^9",
+      "eslint-config-next": "15.3.5",
+      "husky": "^9.1.7",
+      "lint-staged": "^16.1.2",
+      "prettier": "^3.6.2",
+      "tailwindcss": "^4"
+   }
+}
+
+
+============================================================
+FILE: postcss.config.mjs
+============================================================
+const config = {
+   plugins: {
+      "@tailwindcss/postcss": {},
+      autoprefixer: {},
+   },
+};
+
+export default config;
+
+
+============================================================
+FILE: PROJECT_STRUCTURE.md
+============================================================
+# Project Structure Overview
+
+This document provides an overview of the project structure for your Next.js menu app, along with a simple explanation of what each main component and file does.
+
+```
+menu-app/
+├── db.json                  # Mock database for menu data (used by json-server)
+├── package.json             # Project dependencies and scripts
+├── next.config.mjs          # Next.js configuration (e.g., image domains)
+├── postcss.config.mjs       # PostCSS configuration for Tailwind CSS
+├── tailwind.config.js       # Tailwind CSS configuration
+├── .gitignore               # Git ignored files
+├── src/
+│   ├── app/
+│   │   ├── globals.css      # Global styles for the app
+│   │   ├── layout.js        # Main layout for the app
+│   │   ├── page.js          # Main entry page (redirects to /menu)
+│   │   ├── (dashboard)/     # Dashboard-related pages (admin)
+│   │   │   ├── layout.js    # Dashboard layout with sidebar
+│   │   │   ├── page.js      # Dashboard home page
+│   │   │   ├── addcategory/ # Add new category page and form
+│   │   │   ├── addproduct/  # Add new product page
+│   │   │   ├── categories/  # View categories page
+│   │   │   └── products/    # View products page
+│   │   ├── (public)/        # Public-facing menu pages
+│   │   │   └── menu/
+│   │   │       ├── page.js  # Menu page (main user interface)
+│   │   │       └── loading.jsx # Loading skeleton for menu
+│   │   └── api/
+│   │       └── db/
+│   │           └── route.js # API route to serve db.json data
+│   ├── features/
+│   │   ├── dashboard/
+│   │   │   ├── components/  # Dashboard sidebar and file upload
+│   │   │   └── hooks/       # Custom hooks (e.g., file upload)
+│   │   └── public/
+│   │       ├── cart/
+│   │       │   └── CartDesktop.jsx              # Shopping cart component for desktop view
+│   │       ├── categories/
+│   │       │   ├── Categories.jsx               # Main categories component
+│   │       │   ├── CategoriesDesktop.jsx        # Categories for desktop view
+│   │       │   ├── CategoriesMobile.jsx         # Categories for mobile view
+│   │       │   ├── CategoriesSwitcher.jsx       # Switches between categories
+│   │       │   ├── CategoryCard.jsx             # Displays a single category card
+│   │       │   ├── CategoryTabDisktop.jsx       # Tab for categories on desktop
+│   │       │   ├── CategoryTabSkeleton.jsx      # Skeleton loader for category tabs
+│   │       │   ├── categories.css               # Styles for categories
+│   │       │   └── useActiveCategory.js         # Hook to manage active category state
+│   │       ├── header/
+│   │       │   ├── Header.jsx                   # Main header component
+│   │       │   ├── components/
+│   │       │   │   ├── BranchSelector.jsx       # Dropdown to select branch
+│   │       │   │   ├── IconButton.jsx           # Reusable icon button
+│   │       │   │   └── TopBar.jsx               # Top bar section of header
+│   │       │   ├── header.css                   # Styles for header
+│   │       │   └── icons/
+│   │       │       ├── BranchIcon.jsx           # Icon for branch
+│   │       │       ├── CartIcon.jsx             # Icon for cart
+│   │       │       └── MenuIcon.jsx             # Icon for menu
+│   │       ├── menuList/
+│   │       │   ├── MenuItem.jsx                 # Displays a single menu item
+│   │       │   ├── MenuItemSkeleton.jsx         # Skeleton loader for menu item
+│   │       │   └── MenuList.jsx                 # List of menu items
+│   │       ├── products/
+│   │       │   └── productModal/
+│   │       │       ├── ProductActions.jsx         # Handles product-related actions (e.g., add to cart)
+│   │       │       ├── ProductDetails.jsx         # Displays detailed information about a product
+│   │       │       ├── ProductDetailsModal.jsx    # Modal component for showing product details
+│   │       │       ├── ProductImageWithClose.jsx  # Shows product image with a close button
+│   │       │       └── ProductModalOverlay.jsx    # Overlay for the product modal
+│   │       ├── services/
+│   │       │   └── getGroups.js                  # Service to fetch group data
+│   │       └── sidebar/
+│   │           ├── ArrowIcon.jsx                 # Icon for sidebar navigation
+│   │           ├── Sidebar.jsx                   # Main sidebar component
+│   │           ├── SidebarContent.jsx            # Content for sidebar
+│   │           └── sidebar.css                   # Styles for sidebar
+│   └── store/
+│       └── cartStore.js     # Zustand store for cart state management
+└── public/
+    └── ...                  # Static assets (images, etc.)
+```
+
+---
+
+## Key Components & Files
+
+- **db.json**: Contains all menu data (categories, products, etc.) used for local development and API mocking.
+- **src/app/**: Main application folder for Next.js routing, layouts, and pages.
+   - **globals.css**: Global CSS and Tailwind imports.
+   - **layout.js**: Root layout for the app.
+   - **(dashboard)/**: Admin dashboard pages for managing categories and products.
+   - **(public)/menu/page.js**: Main menu page for users to browse food items.
+   - **api/db/route.js**: API endpoint to serve menu data from db.json.
+- **src/features/**: Contains all feature-specific React components.
+   - **dashboard/**: Components and hooks for admin dashboard (sidebar, file upload).
+   - **public/**: Components for the public-facing menu (cart, categories, header, menu list, products, sidebar).
+- **src/store/cartStore.js**: Zustand store for managing cart state globally.
+- **tailwind.config.js, postcss.config.mjs**: Tailwind CSS and PostCSS configuration files.
+- **next.config.mjs**: Next.js configuration, including image domain whitelisting.
+- **package.json**: Project metadata, dependencies, and scripts (including `json-server` for local API).
+
+---
+
+## How It Works
+
+- The **public menu** is rendered using components in `src/features/public/` and data fetched from the local API (`db.json` via `api/db/route.js`).
+- The **dashboard** allows admins to add/view categories and products.
+- **State management** for the cart is handled by Zustand (`src/store/cartStore.js`).
+- **Styling** is done with Tailwind CSS, configured in `tailwind.config.js` and imported in `globals.css`.
+- **API requests** for menu data use service functions in `src/features/public/services/`.
+
+---
+
+This structure helps keep your code organized, maintainable, and scalable as your menu app grows.
+
+
+============================================================
+FILE: README.md
+============================================================
+# Menu App
+
+This is a modern, responsive menu application built with Next.js and Tailwind CSS. It provides a seamless user experience for browsing food categories and items, with a dynamic layout that adapts to different screen sizes.
+
+## ✨ Features
+
+-  **Responsive Design**: Optimized for small, medium, and large screens.
+-  **Component-Based Architecture**: Built with reusable React components.
+-  **Dynamic Layout**: The layout adjusts based on the screen size to provide the best user experience.
+-  **Skeleton Loading**: Skeletons are shown while content is loading to reduce Cumulative Layout Shift (CLS) and improve perceived performance.
+-  **Sticky Elements**: The shopping cart and category switcher are sticky for easy access.
+-  **Modern Tech Stack**: Utilizes Next.js for server-side rendering and Tailwind CSS for styling.
+
+## 🛠️ Tech Stack
+
+-  **Framework**: [Next.js](https://nextjs.org/)
+-  **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-  **Language**: JavaScript (with JSX)
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your machine.
+
+-  [Node.js](https://nodejs.org/)
+-  [npm](https://www.npmjs.com/get-npm)
+
+### Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/menu-app.git
+   ```
+2. **Navigate to the project directory:**
+   ```sh
+   cd menu-app
+   ```
+3. **Install the dependencies:**
+   ```sh
+   npm install
+   ```
+
+## 🛡️ Environment Variables
+
+All environment variables should be defined in the `.env` file. See `.env.example` for required variables.
+
+-  `NEXT_PUBLIC_API_URL`: The base URL for your API.
+-  `NEXT_PUBLIC_APP_NAME`: The name of your application.
+
+### Setting Up Environment Variables
+
+1. Copy `.env.example` to `.env`:
+   ```sh
+   cp .env.example .env
+   ```
+2. Fill in the required values in `.env`.
+
+### Running the Development Server
+
+To start the development server, run the following command:
+
+```sh
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 📁 Project Structure
+
+```
+src
+├── app
+│   ├── globals.css         # Global styles
+│   ├── layout.js           # Main layout component
+│   └── page.js             # Main page component
+└── components
+    ├── cart
+    │   └── CartDesktop.jsx   # Desktop cart component
+    ├── categories
+    │   ├── CategoriesDesktop.jsx
+    │   ├── CategoriesMobile.jsx
+    │   ├── CategoriesSwitcher.jsx
+    │   ├── CategoryTab.jsx
+    │   └── ...               # Other category-related components
+    ├── header
+    │   ├── Header.jsx        # Header component
+    │   └── ...               # Other header-related components
+    ├── menu
+    │   ├── MenuItem.jsx      # Menu item component
+    │   ├── MenuList.jsx      # Menu list component
+    │   └── ...               # Other menu-related components
+    └── shared
+        ├── Button.jsx        # Reusable button component
+        └── IconButton.jsx    # Reusable icon button component
+```
+
+
+============================================================
+FILE: tailwind.config.js
+============================================================
+const colors = require("tailwindcss/colors");
+
+module.exports = {
+   content: [
+      "./src/**/*.{js,ts,jsx,tsx,css}",
+      "./app/**/*.{js,ts,jsx,tsx}",
+      "./components/**/*.{js,ts,jsx,tsx}",
+   ],
+   theme: {
+      extend: {
+         fontFamily: {
+            ibm: ["var(--font-ibm-arabic)"],
+         },
+      },
+   },
+   plugins: [],
+};

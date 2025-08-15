@@ -1,25 +1,12 @@
-const GET_GROUPS = "/api/db";
+import data from "@/../db.json";
 
 export const getGroups = async () => {
-  // await new Promise((resolve) => setTimeout(resolve, 30000));
+  // No fetch needed, just return the imported data directly.
+  // We keep it async to avoid changing the components that use it.
   try {
-    const res = await fetch(GET_GROUPS, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: { revalidate: 600 }, // Revalidate every 10 minutes
-    });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch products: ${res.status}`);
-    }
-
-    const products = await res.json();
-    console.log(products);
-    return products.groups;
+    return data.groups;
   } catch (error) {
-    console.error("Error fetching Groups:", error);
+    console.error("Error reading groups from db.json:", error);
     return [];
   }
 };

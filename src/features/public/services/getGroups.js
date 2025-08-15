@@ -1,5 +1,4 @@
-// src/services/getProducts.js
-const GET_GROUPS = `${process.env.NEXT_PUBLIC_API_URL}/api/db`;
+const GET_GROUPS = "/api/db";
 
 export const getGroups = async () => {
   // await new Promise((resolve) => setTimeout(resolve, 30000));

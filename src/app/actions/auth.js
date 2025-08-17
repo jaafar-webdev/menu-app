@@ -26,7 +26,7 @@ export async function loginAction(token) {
 
 export async function logoutAction() {
   try {
-    cookies().delete("authToken");
+    cookies().set("authToken", "", { maxAge: 0, path: "/" });
     return { success: true, message: "Logged out successfully" };
   } catch (error) {
     console.error("Logout Action Error:", error);

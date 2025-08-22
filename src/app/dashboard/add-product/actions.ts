@@ -123,8 +123,7 @@ export async function addProduct(
       };
    }
 
-   revalidatePath("/dashboard");
-   revalidatePath("/admin/products");
+   revalidatePath("/menu");
 
    return {
       message: "تم إنشاء المنتج بنجاح!",

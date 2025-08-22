@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    // مستوى الـ ECMAScript اللي الكود هيتحوّل ليه
+    "target": "es2022",
+    // المكتبات اللي بيقرأها TypeScript (DOM, ESNext... إلخ)
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // السماح بملفات JavaScript مع TS (مهم لو عندك ملفات .js/.jsx)
+    "allowJs": true,
+    // يتجاهل فحص الـ types للـ node_modules عشان السرعة
+    "skipLibCheck": true,
+    // تفعيل القواعد الصارمة في TypeScript (أفضل ممارسة)
+    "strict": true,
+    // يتأكد إن أسماء الملفات متوافقة في حالة الحروف (مهم على Linux و Git)
+    "forceConsistentCasingInFileNames": true,
+    // ما يطلعش ملفات JS عند الكومبايل (Next.js بيتكفل بالكومبايل)
+    "noEmit": true,
+    // يسهل التعامل مع مكتبات CommonJS
+    "esModuleInterop": true,
+    // نوع الموديولز المستخدم
+    "module": "esnext",
+    // إزاي يحل الاستيرادات (Node.js style)
+    "moduleResolution": "node",
+    // السماح بقراءة JSON كاستيراد مباشر
+    "resolveJsonModule": true,
+    // مطلوب في Next.js عشان يشتغل مع TS بشكل صحيح
+    "isolatedModules": true,
+    // نوع JSX: (react-jsx = React 17+ مع JSX Runtime الجديد)
+    "jsx": "preserve",
+    // الكومبايل بيبني بشكل تدريجي أسرع
+    "incremental": true,
+    // إضافة الـ plugin بتاع Next.js عشان يعرف البيئة
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // ✅ مهم: تفعيل alias @/src/
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  // الملفات اللي هيقراها TypeScript
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".next/types/**/*.ts"
+  ],
+  // الملفات اللي يتجاهلها
+  "exclude": [
+    "node_modules"
+  ]
+}

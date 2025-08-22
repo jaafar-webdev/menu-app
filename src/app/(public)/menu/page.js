@@ -1,4 +1,3 @@
-import Header from "@/features/public/header/Header";
 import MenuList from "@/features/public/menuList/MenuList";
 import CartDesktop from "@/features/public/cart/CartDesktop";
 import { getGroups } from "@/features/public/services/getGroups";
@@ -6,6 +5,7 @@ import Categories from "@/features/public/categories/Categories";
 
 export default async function MenuPage() {
   const groups = await getGroups();
+  const logConsole = await console.log("page", groups);
 
   return (
     <div className="main-container w-full">

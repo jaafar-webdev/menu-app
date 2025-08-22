@@ -5,6 +5,7 @@ import CategoryTab from "./CategoryCard";
 
 export default function Categories({ groups }) {
   const activeId = useActiveCategory(groups);
+  console.log(groups);
 
   return (
     <>
@@ -19,7 +20,7 @@ export default function Categories({ groups }) {
               <li key={category.id} className="flex-shrink-0">
                 <CategoryTab
                   name={category.name}
-                  imageUrl={category.image_url}
+                  imageUrl={category.imageUrl}
                   targetId={`group-${category.id}`}
                   isActive={activeId === `group-${category.id}`}
                 />

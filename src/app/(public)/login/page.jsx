@@ -1,11 +1,11 @@
 "use client";
 
 import useLogin from "@/features/public/hooks/useLogin";
+import AuthLink from "@/components/auth/AuthLink";
 import FormWrapper from "@/components/auth/FormWrapper";
+import Alert from "@/components/ui/Alert";
 import Input from "@/components/ui/Input";
 import Button from "@/components/Button";
-import Alert from "@/components/ui/Alert";
-import AuthLink from "@/components/auth/AuthLink";
 
 const LoginPage = () => {
   const {

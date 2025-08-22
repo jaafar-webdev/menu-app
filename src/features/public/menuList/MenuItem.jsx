@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { truncateWithDots } from "../utils/truncateWithDots";
 import ProductDetailsModal from "../products/productModal/ProductDetailsModal";
+import { memo } from "react";
 
-export default function MenuItem({ product }) {
+const MenuItem = ({ product }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const hasVariants = product.variants && product.variants.length > 0;
   const price = (+product.price).toFixed(2);
@@ -41,16 +42,24 @@ export default function MenuItem({ product }) {
 
         <div className="imgthumb flex-shrink-0 overflow-hidden relative w-[100px] h-[100px] md:w-24 md:h-24 rounded-md lg:w-[120px] lg:h-[120px] bg-gray-100">
           <Image
-            src={product.image_url?.trim()}
-            alt={product.name}
+            src={product.imageUrl}
+            alt={product.name || "صورة المنتج"}
             width={120}
             height={120}
             sizes="(max-width: 768px) 100px, (max-width: 1024px) 96px, 120px"
             className="w-full h-full object-cover"
             unoptimized
+            loading="lazy"
+            onError={(e) => {
+              e.target.style.display = "none";
+              e.target.parentElement.classList.add("bg-gray-200");
+              e.target.parentElement.innerHTML =
+                '<span class="text-gray-500 text-sm">بلا صورة</span>';
+            }}
           />
         </div>
       </div>
+
       <ProductDetailsModal
         product={product}
         open={modalOpen}
@@ -58,4 +67,13 @@ export default function MenuItem({ product }) {
       />
     </>
   );
-}
+};
+
+export default memo(MenuItem, (prevProps, nextProps) => {
+  return (
+    prevProps.product.id === nextProps.product.id &&
+    prevProps.product.price === nextProps.product.price &&
+    prevProps.product.name === nextProps.product.name &&
+    prevProps.product.image_url === nextProps.product.image_url
+  );
+});

@@ -1,10 +1,16 @@
-import data from "@/../db.json";
-
-export const getGroups = async () => {
+export async function getGroups() {
   try {
-    return data.groups;
+    const response = await fetch(`http://localhost:3000/api/groups`);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching groups: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
   } catch (error) {
-    console.error("Error reading groups from db.json:", error);
+    console.error("Error fetching groups:", error);
     return [];
   }
-};
+}

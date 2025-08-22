@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
+  // Bypass middleware for Server Actions
+  if (request.headers.has("x-nextjs-data")) {
+    return NextResponse.next();
+  }
+
   // Get the pathname of the request
   const path = request.nextUrl.pathname;
   console.log(request);

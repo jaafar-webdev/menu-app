@@ -14,6 +14,7 @@ export default function CategoryTab({ name, imageUrl, targetId, isActive }) {
     }
   };
 
+  // تحسين التعامل مع الصور
   const isValidSrc =
     imageUrl && typeof imageUrl === "string" && imageUrl.trim() !== "";
 
@@ -36,7 +37,7 @@ export default function CategoryTab({ name, imageUrl, targetId, isActive }) {
           {isValidSrc ? (
             <Image
               src={imageUrl}
-              alt={name}
+              alt={name || "صورة الفئة"}
               width={130}
               height={90}
               sizes="130px"
@@ -44,6 +45,12 @@ export default function CategoryTab({ name, imageUrl, targetId, isActive }) {
               priority={false}
               unoptimized
               loading="lazy"
+              onError={(e) => {
+                e.target.style.display = "none";
+                e.target.parentElement.classList.add("bg-gray-200");
+                e.target.parentElement.innerHTML =
+                  '<span class="text-gray-400 text-xs">لا صورة</span>';
+              }}
             />
           ) : (
             <span className="text-gray-400 text-xs">لا صورة</span>

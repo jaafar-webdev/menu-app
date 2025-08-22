@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
-import { AuthProvider } from "@/context/AuthContext";
 
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
@@ -21,12 +20,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Create Next App",
+  title: "Restrunt Menu",
   description: "Ibn Elsham Restrunt is a resturant in Elsham, Egypt",
 };
 
-import CartMobileBar from "@/features/public/cart/CartMobileBar";
-import Header from "@/features/public/header/Header";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout({ children }) {
   return (
@@ -34,11 +32,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
       >
-        <AuthProvider>
-          <Header />
-          {children}
-          <CartMobileBar />
-        </AuthProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

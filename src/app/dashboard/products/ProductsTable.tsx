@@ -1,7 +1,16 @@
 
+import { Product } from "@/types";
 import Image from "next/image";
 
-const ProductsTable = ({ products }) => {
+interface ProductWithCategory extends Product {
+   categoryName: string;
+}
+
+interface ProductsTableProps {
+   products: ProductWithCategory[];
+}
+
+const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white rounded-lg shadow-md">
@@ -15,7 +24,7 @@ const ProductsTable = ({ products }) => {
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
-          {products.map((product) => (
+          {products.map((product: ProductWithCategory) => (
             <tr key={product.id} className="border-b border-gray-200 hover:bg-gray-100">
               <td className="py-3 px-6 text-right whitespace-nowrap">
                 <Image

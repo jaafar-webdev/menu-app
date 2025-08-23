@@ -1,3 +1,4 @@
+import { Product, Group } from "@/types";
 import ProductsTable from "./ProductsTable";
 
 async function getProducts() {
@@ -19,8 +20,8 @@ async function getProducts() {
       return [];
    }
 
-   const productsWithCategory = groups.flatMap((group) =>
-      (group.products || []).map((product) => ({
+   const productsWithCategory = groups.flatMap((group: Group) =>
+      (group.products || []).map((product: Product) => ({
          ...product,
          image_url: product.imageUrl, // map imageUrl to image_url
          categoryName: group.name,

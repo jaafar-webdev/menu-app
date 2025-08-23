@@ -43,7 +43,7 @@ export default function ProductDetailsModal({ product, open, onClose }) {
           onClick={(e) => e.stopPropagation()}
         >
           <ProductImageWithClose
-            imageUrl={product.image_url}
+            imageUrl={product.imageUrl}
             name={product.name}
             onClose={onClose}
           />

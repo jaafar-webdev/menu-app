@@ -25,15 +25,18 @@ export const metadata = {
 };
 
 import { AuthProvider } from "@/context/AuthContext";
+import { StrictMode } from "react";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ar" dir="rtl">
-      <body
-        className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
-      >
-        <AuthProvider>{children}</AuthProvider>
-      </body>
-    </html>
+    <StrictMode>
+      <html lang="ar" dir="rtl">
+        <body
+          className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
+        >
+          <AuthProvider>{children}</AuthProvider>
+        </body>
+      </html>
+    </StrictMode>
   );
 }

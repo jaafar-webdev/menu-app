@@ -1,11 +1,10 @@
 "use client";
 
 import { useActiveCategory } from "./useActiveCategory";
-import CategoryTab from "./CategoryCard";
+import CategoryCard from "./CategoryCard";
 
 export default function Categories({ groups }) {
   const activeId = useActiveCategory(groups);
-  console.log(groups);
 
   return (
     <>
@@ -18,7 +17,7 @@ export default function Categories({ groups }) {
           >
             {groups.map((category) => (
               <li key={category.id} className="flex-shrink-0">
-                <CategoryTab
+                <CategoryCard
                   name={category.name}
                   imageUrl={category.imageUrl}
                   targetId={`group-${category.id}`}

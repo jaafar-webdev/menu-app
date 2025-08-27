@@ -3,9 +3,9 @@ This digest is designed to be easily parsed by Large Language Models.
 
 --- SUMMARY ---
 Repository: menu-app
-Files Analyzed: 63
-Total Text Size: 71.17 KB
-Estimated Tokens (text only): ~٢١٬٥٦٦
+Files Analyzed: 73
+Total Text Size: 91.52 KB
+Estimated Tokens (text only): ~٢٦٬١٥٩
 
 --- DIRECTORY STRUCTURE ---
 menu-app/
@@ -60,10 +60,24 @@ menu-app/
 │   │   │   │   ├── actions.ts [binary]
 │   │   │   │   ├── AddCategoryForm.tsx
 │   │   │   │   └── page.tsx
-│   │   │   └── add-product/
-│   │   │       ├── actions.ts [binary]
-│   │   │       ├── AddProductForm.tsx
-│   │   │       └── page.tsx
+│   │   │   ├── add-product/
+│   │   │   │   ├── actions.ts [binary]
+│   │   │   │   ├── AddProductForm.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── category/
+│   │   │   │   ├── actions.ts [binary]
+│   │   │   │   ├── CategoriesTable.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── edit-product/
+│   │   │   │   └── [id]/
+│   │   │   │       ├── actions.ts [binary]
+│   │   │   │       ├── EditProductForm.tsx
+│   │   │   │       └── page.tsx
+│   │   │   ├── products/
+│   │   │   │   ├── actions.ts [binary]
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── ProductsTable.tsx
+│   │   │   └── layout.tsx
 │   │   ├── globals.css
 │   │   ├── layout.js
 │   │   ├── not-found.jsx
@@ -388,15 +402,12 @@ FILE: src/app/(public)/login/page.jsx
 ============================================================
 "use client";
 
-
-
 import useLogin from "@/features/public/hooks/useLogin";
 import AuthLink from "@/components/auth/AuthLink";
 import FormWrapper from "@/components/auth/FormWrapper";
 import Alert from "@/components/ui/Alert";
 import Input from "@/components/ui/Input";
 import Button from "@/components/Button";
-
 
 const LoginPage = () => {
   const {
@@ -774,13 +785,13 @@ import CartMobileBar from "@/features/public/cart/CartMobileBar";
 import Header from "@/features/public/header/Header";
 
 export default function RootLayout({ children }) {
-   return (
-      <>
-         <Header />
-         {children}
-         <CartMobileBar />
-      </>
-   );
+  return (
+    <>
+      <Header />
+      {children}
+      <CartMobileBar />
+    </>
+  );
 }
 
 
@@ -963,6 +974,7 @@ function SubmitButton() {
    );
 }
 
+
 export function AddProductForm() {
    const [state, formAction] = useFormState(addProduct, initialState);
    const [categories, setCategories] = useState<Category[]>([]);
@@ -1089,6 +1101,625 @@ export default function AddProductPage() {
 }
 
 ============================================================
+FILE: src/app/dashboard/category/CategoriesTable.tsx
+============================================================
+"use client";
+import { Group } from "@/types";
+import { deleteCategory } from "./actions";
+import Image from "next/image";
+
+interface CategoriesTableProps {
+   categories: Group[];
+}
+
+const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {
+   const handleDelete = async (categoryId: string) => {
+      const result = await deleteCategory(categoryId);
+      if (!result.success) {
+         alert(result.message);
+      }
+   };
+
+   return (
+      <div className="overflow-x-auto">
+         <table className="min-w-full bg-white rounded-lg shadow-md">
+            <thead className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+               <tr>
+                  <th className="py-3 px-6 text-right">الاسم</th>
+                  <th className="py-3 px-6 text-right">الصورة</th>
+                  <th className="py-3 px-6 text-center">الإجراءات</th>
+               </tr>
+            </thead>
+            <tbody className="text-gray-600 text-sm font-light">
+               {categories.map((category: Group) => (
+                  <tr
+                     key={category.id}
+                     className="border-b border-gray-200 hover:bg-gray-100"
+                  >
+                     <td className="py-3 px-6 text-right">
+                        <span className="font-semibold">{category.name}</span>
+                     </td>
+                     <td>
+                        <div className="m-2">
+                           <Image
+                              src={category.imageUrl!}
+                              alt=""
+                              width={100}
+                              height={100}
+                           />
+                        </div>
+                     </td>
+                     <td className="py-3 px-6 text-center">
+                        <div className="flex item-center justify-center gap-2">
+                           <button className="w-8 h-8 rounded-xl bg-blue-500 text-white flex items-center justify-center mr-2 hover:bg-blue-600">
+                              <svg
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 className="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                              >
+                                 <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L16.732 3.732z"
+                                 />
+                              </svg>
+                           </button>
+                           <button
+                              className="w-8 h-8 rounded-xl bg-red-500 text-white flex items-center justify-center hover:bg-red-600"
+                              onClick={() => handleDelete(category.id!)}
+                           >
+                              <svg
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 className="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                              >
+                                 <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                 />
+                              </svg>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
+      </div>
+   );
+};
+
+export default CategoriesTable;
+
+
+============================================================
+FILE: src/app/dashboard/category/page.tsx
+============================================================
+import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import CategoriesTable from "./CategoriesTable";
+import { Group } from "@/types";
+
+async function getCategories(): Promise<Group[]> {
+   const categoriesCol = collection(db, "categories");
+   const categorySnapshot = await getDocs(categoriesCol);
+   const categoryList = categorySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Group, "id">),
+   }));
+   return categoryList;
+}
+
+export default async function CategoriesPage() {
+   const categories = await getCategories();
+
+   return (
+      <div className="container mx-auto px-4 py-8">
+         <h1 className="text-3xl font-bold mb-6 text-center">قائمة الفئات</h1>
+         <CategoriesTable categories={categories} />
+      </div>
+   );
+}
+
+
+============================================================
+FILE: src/app/dashboard/edit-product/[id]/EditProductForm.tsx
+============================================================
+"use client";
+
+import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import Input from "@/components/ui/Input";
+import Button from "@/components/Button";
+import UploadImage from "@/components/ui/UploadImage";
+import { ProductResponse, updateProduct } from "./actions";
+import { getCategories } from "@/app/dashboard/add-product/actions";
+
+interface Category {
+   id: string;
+   name: string;
+}
+
+interface Product {
+   id: string;
+   name: string;
+   price: number;
+   description: string;
+   imageUrl: string;
+   categoryId: string;
+}
+
+const initialState: ProductResponse = {
+   message: "",
+   success: false,
+};
+
+function SubmitButton() {
+   const { pending } = useFormStatus();
+
+   return (
+      <Button
+         type="submit"
+         className="w-full"
+         aria-disabled={pending}
+         variant="primary"
+         size="default"
+      >
+         {pending ? "جاري التحديث..." : "تحديث المنتج"}
+      </Button>
+   );
+}
+
+export default function EditProductForm({
+   product,
+   categoryId,
+}: {
+   product: Product;
+   categoryId: string;
+}) {
+   const updateProductWithIdAndCategory = updateProduct.bind(
+      null,
+      product.id,
+      categoryId
+   );
+   const [state, formAction] = useFormState(
+      updateProductWithIdAndCategory,
+      initialState
+   );
+   const [categories, setCategories] = useState<Category[]>([]);
+
+   useEffect(() => {
+      async function fetchCategories() {
+         const fetchedCategories = await getCategories();
+         setCategories(fetchedCategories as Category[]);
+      }
+      fetchCategories();
+   }, []);
+
+   return (
+      <form action={formAction} className="space-y-6">
+         <input type="hidden" name="id" value={product.id} />
+         <input type="hidden" name="oldImage" value={product.image} />
+         <div>
+            <label
+               htmlFor="name"
+               className="block text-sm font-medium text-gray-700"
+            >
+               اسم المنتج
+            </label>
+            <Input
+               type="text"
+               id="name"
+               name="name"
+               defaultValue={product.name}
+               className="mt-1"
+               placeholder="مثال: بيتزا مارجريتا"
+               required
+            />
+         </div>
+
+         <div>
+            <label
+               htmlFor="description"
+               className="block text-sm font-medium text-gray-700"
+            >
+               الوصف
+            </label>
+            <textarea
+               id="description"
+               name="description"
+               defaultValue={product.description}
+               rows={3}
+               className="block w-full px-3 py-2 mt-1 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+               placeholder="وصف المنتج..."
+               required
+            ></textarea>
+         </div>
+
+         <div>
+            <label
+               htmlFor="categoryId"
+               className="block text-sm font-medium text-gray-700"
+            >
+               الفئة
+            </label>
+            <select
+               id="categoryId"
+               name="categoryId"
+               defaultValue={product.categoryId}
+               className="block w-full px-3 py-2 mt-1 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+               required
+            >
+               <option value="">اختر فئة</option>
+               {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                     {category.name}
+                  </option>
+               ))}
+            </select>
+         </div>
+
+         <div>
+            <label
+               htmlFor="price"
+               className="block text-sm font-medium text-gray-700"
+            >
+               السعر
+            </label>
+            <Input
+               type="number"
+               id="price"
+               name="price"
+               defaultValue={product.price}
+               placeholder="مثال: 50.00"
+               required
+               step="0.01"
+               className="mt-1"
+            />
+         </div>
+
+         <div>
+            <UploadImage name="image" />
+         </div>
+
+         <SubmitButton />
+
+         {state?.message && (
+            <p
+               className={`mt-2 text-sm ${
+                  state.success ? "text-green-600" : "text-red-600"
+               }`}
+               aria-live="polite"
+            >
+               {state.message}
+            </p>
+         )}
+      </form>
+   );
+}
+
+
+============================================================
+FILE: src/app/dashboard/edit-product/[id]/page.tsx
+============================================================
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import EditProductForm from "./EditProductForm";
+
+async function getProduct(categoryId: string | undefined, productId: string) {
+   if (!categoryId || !productId) {
+      return null;
+   }
+   const docRef = doc(db, "categories", categoryId, "products", productId);
+   const docSnap = await getDoc(docRef);
+
+   if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+   } else {
+      return null;
+   }
+}
+
+export default async function EditProductPage({
+   params,
+   searchParams,
+}: {
+   params: { id: string };
+   searchParams: { [key: string]: string | string[] | undefined };
+}) {
+   const { id } = params;
+   const categoryIdParam = searchParams?.categoryId;
+
+   const categoryId = Array.isArray(categoryIdParam)
+      ? categoryIdParam[0]
+      : categoryIdParam;
+
+   const product = await getProduct(categoryId, id);
+
+   if (!product) {
+      return <div>المنتج غير موجود أو الرابط غير صحيح</div>;
+   }
+
+   return (
+      <div className="container mx-auto px-4 py-8">
+         <h1 className="text-3xl font-bold mb-6 text-center">تعديل المنتج</h1>
+         <EditProductForm product={product} categoryId={categoryId} />
+
+      </div>
+   );
+}
+
+
+============================================================
+FILE: src/app/dashboard/products/page.tsx
+============================================================
+import { Product, Group } from "@/types";
+import ProductsTable from "./ProductsTable";
+
+async function getProducts() {
+   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/groups`, {
+      next: { revalidate: 60 },
+   });
+
+   if (!res.ok) {
+      console.error(await res.text());
+      throw new Error("Failed to fetch data");
+   }
+
+   const groups = await res.json();
+
+   if (!Array.isArray(groups)) {
+      console.error("Fetched data is not an array:", groups);
+      return [];
+   }
+
+   const productsWithCategory = groups.flatMap((group: Group) =>
+      (group.products || []).map((product: Product) => ({
+         ...product,
+         image_url: product.imageUrl, // map imageUrl to image_url
+         categoryName: group.name,
+         categoryId: group.id,
+      }))
+   );
+
+   return productsWithCategory;
+}
+
+export default async function ProductsPage() {
+   const products = await getProducts();
+
+   return (
+      <div className="container mx-auto px-4 py-8">
+         <h1 className="text-3xl font-bold mb-6 text-center">قائمة المنتجات</h1>
+         <ProductsTable products={products} />
+      </div>
+   );
+}
+
+
+============================================================
+FILE: src/app/dashboard/products/ProductsTable.tsx
+============================================================
+"use client";
+
+import { Product } from "@/types";
+import Image from "next/image";
+import { deleteProduct } from "./actions";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+interface ProductWithCategory extends Product {
+   categoryName: string;
+   categoryId: string;
+}
+
+interface ProductsTableProps {
+   products: ProductWithCategory[];
+}
+
+const ProductsTable = ({ products }: ProductsTableProps) => {
+   const router = useRouter();
+   const [deleting, setDeleting] = useState<string | null>(null);
+
+   const handleDelete = async (categoryId: string, productId: string) => {
+      if (!confirm("هل أنت متأكد من حذف المنتج؟")) return;
+      setDeleting(productId);
+
+      try {
+         const result = await deleteProduct(categoryId, productId);
+         if (!result.success) {
+            alert(result.message);
+         }
+      } catch (error) {
+         alert("حدث خطأ أثناء الحذف.");
+      } finally {
+         setDeleting(null);
+      }
+   };
+
+   const handleEditting = (product: ProductWithCategory) => {
+      if (product.id) {
+         router.push(
+            `/dashboard/edit-product/${product.id}?categoryId=${product.categoryId}`
+         );
+      }
+   };
+
+   if (products.length === 0) {
+      return (
+         <div className="text-center py-6 text-gray-500">لا توجد منتجات</div>
+      );
+   }
+
+   return (
+      <div className="overflow-x-auto">
+         <table className="min-w-full bg-white rounded-lg shadow-md">
+            <thead className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+               <tr>
+                  <th className="py-3 px-6 text-right">الصورة</th>
+                  <th className="py-3 px-6 text-right">الاسم</th>
+                  <th className="py-3 px-6 text-center hidden md:table-cell">
+                     الصنف
+                  </th>
+                  <th className="py-3 px-6 text-center">السعر</th>
+                  <th className="py-3 px-6 text-center">الإجراءات</th>
+               </tr>
+            </thead>
+            <tbody className="text-gray-600 text-sm font-light">
+               {products.map((product) => (
+                  <tr
+                     key={product.id}
+                     className="border-b border-gray-200 hover:bg-gray-100"
+                  >
+                     <td className="py-3 px-6 text-right whitespace-nowrap">
+                        <Image
+                           src={product.image_url || "/placeholder.png"}
+                           alt={product.name}
+                           width={64}
+                           height={64}
+                           className="rounded-lg object-cover"
+                           unoptimized
+                        />
+                     </td>
+                     <td className="py-3 px-6 text-right">
+                        <div className="flex flex-col">
+                           <span className="font-semibold">{product.name}</span>
+                           <span className="text-xs text-gray-500 md:hidden">
+                              {product.categoryName}
+                           </span>
+                        </div>
+                     </td>
+                     <td className="py-3 px-6 text-center hidden md:table-cell">
+                        <span className="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">
+                           {product.categoryName}
+                        </span>
+                     </td>
+                     <td className="py-3 px-6 text-center">
+                        {product.price !== null ? (
+                           <span className="font-semibold">
+                              {product.price} جنيه
+                           </span>
+                        ) : (
+                           <span className="text-gray-400">متعدد الأسعار</span>
+                        )}
+                     </td>
+                     <td className="py-3 px-6 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                           <button
+                              className="w-8 h-8 rounded-xl bg-blue-500 text-white flex items-center justify-center hover:bg-blue-600"
+                              onClick={() => handleEditting(product)}
+                           >
+                              <svg
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 className="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                              >
+                                 <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L16.732 3.732z"
+                                 />
+                              </svg>
+                           </button>
+                           <button
+                              disabled={deleting === product.id}
+                              onClick={() =>
+                                 product.id &&
+                                 handleDelete(product.categoryId, product.id)
+                              }
+                              className={`w-8 h-8 rounded-xl text-white flex items-center justify-center hover:bg-red-600 ${
+                                 deleting === product.id
+                                    ? "bg-gray-400 cursor-not-allowed"
+                                    : "bg-red-500"
+                              }`}
+                           >
+                              <svg
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 className="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                              >
+                                 <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                 />
+                              </svg>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
+      </div>
+   );
+};
+
+export default ProductsTable;
+
+
+============================================================
+FILE: src/app/dashboard/layout.tsx
+============================================================
+import Link from "next/link";
+
+export default function DashboardLayout({
+   children,
+}: {
+   children: React.ReactNode;
+}) {
+   return (
+      <div>
+         <nav className="bg-gray-800 p-4 text-white">
+            <div className="container mx-auto flex justify-between">
+               <div className="flex space-x-4">
+                  <Link
+                     href="/dashboard/products"
+                     className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                     المنتجات
+                  </Link>
+                  <Link
+                     href="/dashboard/category"
+                     className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                     الفئات
+                  </Link>
+                  <Link
+                     href="/dashboard/add-product"
+                     className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                     إضافة منتج
+                  </Link>
+                  <Link
+                     href="/dashboard/add-category"
+                     className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                     إضافة صنف
+                  </Link>
+               </div>
+            </div>
+         </nav>
+         <main className="p-4">{children}</main>
+      </div>
+   );
+}
+
+
+============================================================
 FILE: src/app/globals.css
 ============================================================
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap");
@@ -1166,16 +1797,19 @@ export const metadata = {
 };
 
 import { AuthProvider } from "@/context/AuthContext";
+import { StrictMode } from "react";
 
 export default function RootLayout({ children }) {
    return (
-      <html lang="ar" dir="rtl">
-         <body
-            className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
-         >
-            <AuthProvider>{children}</AuthProvider>
-         </body>
-      </html>
+      <StrictMode>
+         <html lang="ar" dir="rtl">
+            <body
+               className={`${ibmArabic.variable} ${geistSans.variable} ${geistMono.variable}`}
+            >
+               <AuthProvider>{children}</AuthProvider>
+            </body>
+         </html>
+      </StrictMode>
    );
 }
 
@@ -1184,14 +1818,14 @@ export default function RootLayout({ children }) {
 FILE: src/app/not-found.jsx
 ============================================================
 export default function notFound() {
-   return (
-      <div className="flex flex-col items-center justify-center h-screen">
-         <h1 className="text-4xl font-bold text-red-600">404 - Not Found!</h1>
-      </div>
-   );
+  return (
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold text-red-600">404 - Not Found!</h1>
+    </div>
+  );
 }
 export const metadata = {
-   title: "Not Found",
+  title: "Not Found",
 };
 
 
@@ -1718,7 +2352,6 @@ export function middleware(request) {
 
   return NextResponse.next();
 }
-
 
 // See "Matching Paths" below to learn more
 export const config = {
@@ -2266,6 +2899,12 @@ const nextConfig = {
             protocol: "https",
             hostname: "media-files.tryordersystem.com",
             port: "", 
+            pathname: "/**",
+         },
+         {
+            protocol: "https",
+            hostname: "res.cloudinary.com",
+            port: "",
             pathname: "/**",
          },
       ],

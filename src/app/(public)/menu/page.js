@@ -5,7 +5,6 @@ import Categories from "@/features/public/categories/Categories";
 
 export default async function MenuPage() {
   const groups = await getGroups();
-  const logConsole = await console.log("page", groups);
 
   return (
     <div className="main-container w-full">

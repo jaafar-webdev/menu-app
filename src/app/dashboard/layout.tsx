@@ -17,6 +17,12 @@ export default function DashboardLayout({
                      المنتجات
                   </Link>
                   <Link
+                     href="/dashboard/category"
+                     className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                     الفئات
+                  </Link>
+                  <Link
                      href="/dashboard/add-product"
                      className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                   >

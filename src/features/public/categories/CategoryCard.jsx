@@ -26,7 +26,7 @@ export default function CategoryTab({ name, imageUrl, targetId, isActive }) {
         title={name}
         className={`w-full flex flex-col text-center rounded-lg overflow-hidden p-1 
                        transition-all duration-200 transform focus:outline-none 
-                       hover:bg-gray-50 group font-normal
+                       hover:bg-primary hover:text-white group font-normal
                        ${
                          isActive
                            ? "bg-primary text-white"

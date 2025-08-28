@@ -12,3 +12,32 @@
    -webkit-mask-position: center;
 }
 
+
+.branch-dropdown {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.branch-dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.branch-dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.branch-dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.branch-dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms, transform 200ms;
+}
